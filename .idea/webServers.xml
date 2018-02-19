@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d3575027-423c-4ade-aef5-1ec777f50240" name="Local Server" url="http://localhost:3000/">
+        <fileTransfer port="0" mountedRoot="C:\Users\Nightingale\Documents\GitHub\WebAppGenerics-DAT076-\deployment" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
