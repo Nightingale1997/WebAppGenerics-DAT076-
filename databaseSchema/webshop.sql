@@ -6,116 +6,69 @@
 -- To reset the sample schema, replace everything with
 -- two dots ('..' - without quotes).
 
-CREATE TABLE "Account" (
-    "AccountID" int  NOT NULL ,
-    "Email" varchar(200)  NOT NULL ,
-    "Password" varchar(200)  NOT NULL ,
-    "Level" int  NOT NULL ,
-    "Name" string  NULL ,
-    "Address1" string  NULL ,
-    "Address2" string  NULL ,
-    "Phone" string  NULL ,
-    CONSTRAINT "pk_Account" PRIMARY KEY (
-        "AccountID"
-    )
-)
+CREATE TABLE Account (
+    AccountID int  NOT NULL ,
+    Email varchar(200)  NOT NULL ,
+    Password varchar(200)  NOT NULL ,
+    Admin boolean  NOT NULL ,
+    Name varchar(200)  NULL ,
+    Address1 varchar(200)  NULL ,
+    Address2 varchar(200)  NULL ,
+    Phone varchar(200)  NULL ,
+    PRIMARY KEY (AccountID)
+);
 
-GO
 
-CREATE TABLE "Order" (
-    "OrderID" int  NOT NULL ,
-    "AccountID" int  NOT NULL ,
-    "ShoppingCartID" int  NOT NULL ,
-    "Address" string  NOT NULL ,
-    "CustomerName" string  NOT NULL ,
-    "OrderStatus" enum  NOT NULL ,
-    CONSTRAINT "pk_Order" PRIMARY KEY (
-        "OrderID"
-    )
-)
 
-GO
+CREATE TABLE Purchase (
+    PurchaseID int  NOT NULL ,
+    AccountID int  NOT NULL ,
+    ShoppingCartID int  NOT NULL ,
+    Address varchar(200)  NOT NULL ,
+    CustomerName varchar(200)  NOT NULL ,
+    PurchaseStatus ENUM ('Success','Fail', 'Cancel')  NOT NULL ,
+    PRIMARY KEY (PurchaseID)
+);
 
-CREATE TABLE "ShoppingCartProduct" (
-    "ProductID" int  NOT NULL ,
-    "ShoppingCartID" int  NOT NULL 
-)
 
-GO
 
-CREATE TABLE "SaleProduct" (
-    "ProductID" int  NOT NULL ,
-    "SaleID" int  NOT NULL 
-)
+CREATE TABLE ShoppingCartProduct (
+    ProductID int  NOT NULL ,
+    ShoppingCartID int  NOT NULL 
+);
 
-GO
 
-CREATE TABLE "ShoppingCart" (
-    "ShoppingCartID" int  NOT NULL ,
-    "AccountID" int  NOT NULL ,
-    "Quantity" int  NOT NULL ,
-    "TotalPrice" int  NOT NULL ,
-    CONSTRAINT "pk_ShoppingCart" PRIMARY KEY (
-        "ShoppingCartID"
-    )
-)
 
-GO
+CREATE TABLE SaleProduct (
+    ProductID int  NOT NULL ,
+    SaleID int  NOT NULL 
+);
 
-CREATE TABLE "Sale" (
-    "SaleID" int  NOT NULL ,
-    "SaleModifier" int  NOT NULL ,
-    "StartDate" DateTime  NOT NULL ,
-    "EndDate" DateTime  NOT NULL ,
-    CONSTRAINT "pk_Sale" PRIMARY KEY (
-        "SaleID"
-    )
-)
 
-GO
 
--- Table documentation comment 1 (try the PDF/RTF export)
--- Table documentation comment 2
-CREATE TABLE "Product" (
-    "ProductID" int  NOT NULL ,
-    -- Field documentation comment 1
-    -- Field documentation comment 2
-    -- Field documentation comment 3
-    "Name" varchar(200)  NOT NULL ,
-    "Description" string  NOT NULL ,
-    "Price" money  NOT NULL ,
-    CONSTRAINT "pk_Product" PRIMARY KEY (
-        "ProductID"
-    )
-)
+CREATE TABLE ShoppingCart (
+    ShoppingCartID int  NOT NULL ,
+    AccountID int  NOT NULL ,
+    Quantity int  NOT NULL ,
+    TotalPrice int  NOT NULL ,
+    PRIMARY KEY (ShoppingCartID)
+);
 
-GO
 
-ALTER TABLE "Order" ADD CONSTRAINT "fk_Order_AccountID" FOREIGN KEY("AccountID")
-REFERENCES "Account" ("AccountID")
-GO
 
-ALTER TABLE "Order" ADD CONSTRAINT "fk_Order_ShoppingCartID" FOREIGN KEY("ShoppingCartID")
-REFERENCES "ShoppingCart" ("ShoppingCartID")
-GO
+CREATE TABLE Sale (
+    SaleID int  NOT NULL ,
+    SaleModifier int  NOT NULL ,
+    StartDate DateTime  NOT NULL ,
+    EndDate DateTime  NOT NULL ,
+    PRIMARY KEY (SaleID)
+);
 
-ALTER TABLE "ShoppingCartProduct" ADD CONSTRAINT "fk_ShoppingCartProduct_ProductID" FOREIGN KEY("ProductID")
-REFERENCES "Product" ("ProductID")
-GO
-
-ALTER TABLE "ShoppingCartProduct" ADD CONSTRAINT "fk_ShoppingCartProduct_ShoppingCartID" FOREIGN KEY("ShoppingCartID")
-REFERENCES "ShoppingCart" ("ShoppingCartID")
-GO
-
-ALTER TABLE "SaleProduct" ADD CONSTRAINT "fk_SaleProduct_ProductID" FOREIGN KEY("ProductID")
-REFERENCES "Product" ("ProductID")
-GO
-
-ALTER TABLE "SaleProduct" ADD CONSTRAINT "fk_SaleProduct_SaleID" FOREIGN KEY("SaleID")
-REFERENCES "Sale" ("SaleID")
-GO
-
-ALTER TABLE "ShoppingCart" ADD CONSTRAINT "fk_ShoppingCart_AccountID" FOREIGN KEY("AccountID")
-REFERENCES "Account" ("AccountID")
-GO
+CREATE TABLE Product (
+    ProductID int  NOT NULL ,
+    Name varchar(200)  NOT NULL ,
+    Description text  NOT NULL ,
+    Price int  NOT NULL ,
+    PRIMARY KEY (ProductID)
+);
 
