@@ -110,6 +110,8 @@ textarea {
 body{
     margin:0;
     font-family: RalewayRegular;
+    background: #27282e;
+    color: #e8e5e0;
 }
 
 
@@ -118,7 +120,7 @@ body{
     margin: 0 auto;
 }
 
-header{
+header, footer{
     background-color: #161618;
     padding: 5px 0px;
 }
@@ -149,6 +151,7 @@ header{
     outline: none;
     border: 0px solid;
     background:#e8e5e0;
+    padding-left: 2.5%;
 
 }
 
@@ -171,25 +174,65 @@ button img{
 .headerbuttongroup{
     width:26%;
 }
+.headerbuttongroup button{
+    margin-right:10%;
+}
 
 .headerbuttongroup .cart{
     width: 17.5%
 }
 button{
     border:none;
-    font-family: RalewayBold;
+
     background: transparent;
-    color: #e8e5e0;
     cursor: pointer;
+    color: #e8e5e0;
 }
 
 
 .coloredbutton{
+    font-family: RalewayBold;
     background-color: #ffcf35;
     padding: 2% 3%;
     color: #161618;
 }
 
+.skdslider{
+    height: 500px !important;
+}
+
+.skdslider img{
+    position:relative;
+    min-width: 1900px;
+    min-height: 500px;
+}
+
+#bannerslider, #bannerslider li{
+    height: 100% !important;
+}
+
+#bannerslider li{
+direction: rtl;
+}
+
+.slide-desc{
+    background: rgba(22, 22, 24, 0.8) !important;
+    height: 65%;
+    width: 25%;
+    left: 20% !important;
+    bottom:15% !important;
+
+}
+
+h2{
+    font-family: RalewayBold;
+    color: #ffcf35;
+}
+
+p{
+    font-family: RalewayRegular;
+    color: #e8e5e0;
+}
 
 
 
@@ -199,9 +242,18 @@ button{
 
 
 
+footer p{
+    width: 80%;
+    color: gray;
+    font-size:0.8em;
+    display:inline-block;
+}
 
-
-
+footer img{
+    width:7.5%;
+    display:inline-block;
+    margin-right: 10%;
+}
 
 /* ==========================================================================
    Helper classes
