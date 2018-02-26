@@ -8,6 +8,8 @@ var mustacheExpress = require('mustache-express');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+var db = require('./controllers/db');
+
 var app = express();
 
 // Make it possible to access a session object in Mustache templates

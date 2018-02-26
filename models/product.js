@@ -1,11 +1,15 @@
-var method = Animal.prototype;
+// Constructor
 
-function Animal(age) {
-    this._age = age;
-}
-
-method.getAge = function() {
-    return this._age;
+function Product(id, name, description, price, genre) {
+    this.productID = id;
+    this.productName = name;
+    this.description = description;
+    this.price = price;
+    this.genre = genre;
 };
 
-module.exports = Animal;
+
+
+
+
+module.exports = Product;
