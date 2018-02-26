@@ -1,0 +1,11 @@
+{
+    "products": [
+        {
+            "productID": 1,
+            "productName": "Kevin",
+            "description": "Cool",
+            "price": 10,
+            "genre": "spook"
+        }
+    ]
+}

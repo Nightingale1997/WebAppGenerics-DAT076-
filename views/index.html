@@ -27,20 +27,15 @@
 <div class="wrapper">
     <section></section>
     <!-- Add your site or application content here -->
-    <p>Insert shop here pls</p>
+    <ul id="productlist"></ul>
     <p>Add Categories</p>
     <p>Display products to the right?</p>
 
 </div>
 {{ >partials/footer }}
 
+{{ >partials/scripts }}
 
-<script src="javascripts/vendor/modernizr-3.5.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-
-<script src="javascripts/plugins.js"></script>
-<script src="javascripts/main.js"></script>
 <script src="javascripts/skdslider.js"></script>
 <script>
 
@@ -54,11 +49,29 @@
     });
 
 </script>
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-<script>
-    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-    ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+
+<script id="product-template" type="text/template">
+    {{#products}}
+    <li>{{productName}}</li>
+    {{/products}}
 </script>
-<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+
+<script>
+
+    $(function () {
+        $.getJSON('../productlist.json',
+            function(data) {
+                var template = $('#product-template').html();
+                var info = Mustache.to_html(template, data);
+                console.log("Test1" + info);
+                $('#productlist').html(info);
+            });
+
+
+
+    });
+
+</script>
 </body>
 </html>
