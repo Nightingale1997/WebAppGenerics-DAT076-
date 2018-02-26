@@ -6,37 +6,42 @@
 -- To reset the sample schema, replace everything with
 -- two dots ('..' - without quotes).
 
-CREATE TABLE Account (
-    AccountID int  NOT NULL ,
-    Email varchar(200)  NOT NULL ,
-    Password varchar(200)  NOT NULL ,
-    Admin boolean  NOT NULL ,
-    Name varchar(200)  NULL ,
-    Address1 varchar(200)  NULL ,
-    Address2 varchar(200)  NULL ,
-    Phone varchar(200)  NULL ,
-    PRIMARY KEY (AccountID)
-);
+CREATE TABLE account
+(
+    Username VARCHAR(16)  NOT NULL,
+    Email    VARCHAR(200) NOT NULL,
+    Password BINARY(60)   NOT NULL,
+    Admin    TINYINT(1)   NOT NULL,
+    Name     VARCHAR(200) NULL,
+    Address1 VARCHAR(200) NULL,
+    Address2 VARCHAR(200) NULL,
+    Phone    VARCHAR(200) NULL,
+    userID   INT AUTO_INCREMENT
+    PRIMARY KEY,
+    CONSTRAINT account_Username_uindex
+    UNIQUE (Username),
+    CONSTRAINT account_Email_uindex
+    UNIQUE (Email),
+    CONSTRAINT account_userID_uindex
+    UNIQUE (userID)
+)
+
+CREATE TABLE purchase
+(
+    PurchaseID     INT          NOT NULL
+        PRIMARY KEY,
+    AccountID      INT          NOT NULL,
+    ShoppingCartID INT          NOT NULL,
+    Address        VARCHAR(200) NOT NULL,
+    CustomerName   VARCHAR(200) NOT NULL
+)
 
 
-
-CREATE TABLE Purchase (
-    PurchaseID int  NOT NULL ,
-    AccountID int  NOT NULL ,
-    ShoppingCartID int  NOT NULL ,
-    Address varchar(200)  NOT NULL ,
-    CustomerName varchar(200)  NOT NULL ,
-    PurchaseStatus ENUM ('Success','Fail', 'Cancel')  NOT NULL ,
-    PRIMARY KEY (PurchaseID)
-);
-
-
-
-CREATE TABLE ShoppingCartProduct (
-    ProductID int  NOT NULL ,
-    ShoppingCartID int  NOT NULL 
-);
-
+CREATE TABLE shoppingcartproduct
+(
+    ProductID      INT NOT NULL,
+    ShoppingCartID INT NOT NULL
+)
 
 
 CREATE TABLE SaleProduct (
@@ -59,15 +64,15 @@ CREATE TABLE ShoppingCart (
 CREATE TABLE Sale (
     SaleID int  NOT NULL ,
     SaleModifier int  NOT NULL ,
-    StartDate DateTime  NOT NULL ,
-    EndDate DateTime  NOT NULL ,
+  --  StartDate DateTime  NOT NULL ,
+  --  EndDate DateTime  NOT NULL ,
     PRIMARY KEY (SaleID)
 );
 
 CREATE TABLE Product (
     ProductID int  NOT NULL ,
     Name varchar(200)  NOT NULL ,
-    Description text  NOT NULL ,
+    Description varchar(200)  NOT NULL ,
     Price int  NOT NULL ,
     PRIMARY KEY (ProductID)
 );
