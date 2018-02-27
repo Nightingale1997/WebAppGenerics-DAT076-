@@ -9,12 +9,10 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var db = require('./controllers/db');
 var app = express();
-var Product = require('./models/Product');
-var ProductList = require('./models/ProductList');
 
 
-var productList = new ProductList();
-productList.addProduct(new Product(1, "Kevin", "Cool", 10, "spook"));
+
+
 
 // Make it possible to access a session object in Mustache templates
 app.use(function(req, res, next) {

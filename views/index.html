@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
 {{ >partials/head }}
-<body>
+<body onload="loadProducts()">
 
 {{ >partials/header}}
 
@@ -50,27 +50,17 @@
 
 </script>
 
-<script id="product-template" type="text/template">
-    {{#products}}
-    <li>{{productName}}</li>
-    {{/products}}
-</script>
 
 
 <script>
 
-    $(function () {
-        $.getJSON('../productlist.json',
-            function(data) {
-                var template = $('#product-template').html();
-                var info = Mustache.to_html(template, data);
-                console.log("Test1" + info);
-                $('#productlist').html(info);
-            });
+  function loadProducts(){
 
+      $.get( "/index.html", function( data ) {
+          $('#productlist').html(data);
+      });
 
-
-    });
+  };
 
 </script>
 </body>
