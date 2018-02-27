@@ -16,11 +16,16 @@ router.get('/index.html', (req, res, next) => {
     productList.addProduct(new Product(2, "Street Fighter", "People fight in the streets", 15, "Fighting"));
 
     var products = productList.products;
-    var html = "";
+   /* var html = "";
     products.forEach(function(element) {
         html += "<ul><li>Title: "+ element.productName +"</li><li>Description: "+ element.description +"</li><li>Price: "+ element.price +" Euro</li><li>Genre: "+ element.genre +"</li></ul><br><br>";
-    });
+    });*/
 
+
+    var products = {products: products};
+   var template = "{{#products}}<ul><li>Title: {{productName}}</li><li>Description: {{description}}</li><li>Price: {{price}}</li><li>Genre: {{genre}}</li></ul> <br> <br>{{/products}}"
+      var html = Mustache.to_html(template, products);
+   console.log(html);
     res.send(html);
 });
 
