@@ -19,7 +19,7 @@ router.get('/login', function(req, res, next) {
 
 //Login post
 router.post('/login', passport.authenticate('local'),
-    function(res,req){
+    function(req,res){
         res.redirect('profile');
     }
 
