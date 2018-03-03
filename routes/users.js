@@ -13,13 +13,13 @@ router.get('/register', function(req, res, next) {
 
 
 //Login page
-router.get('/login', function(req, res, next) {
-    res.render('login');
+router.get('/login', authenticationMiddleware(),function(req, res, next) {
+    res.render('profile');
 });
 
 //Login post
 router.post('/login', passport.authenticate('local'),
-    function(res,req){
+    function(req,res){
         res.redirect('profile');
     }
 
@@ -118,13 +118,14 @@ function authenticationMiddleware () {
     return (req, res, next) => {
         console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
         if (req.isAuthenticated()) return next();
-        res.redirect('login')
+        res.render('login')
     }
 }
 
 
 router.get('/logout', function(req, res){
     req.logout();
+    req.session.destroy();
     res.redirect('login');
 });
 

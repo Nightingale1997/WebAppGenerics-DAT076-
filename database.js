@@ -11,4 +11,4 @@ connection.connect()
 module.exports = connection;
 
 
-//use enviroment files when developing for real
+//use environment files when developing for real

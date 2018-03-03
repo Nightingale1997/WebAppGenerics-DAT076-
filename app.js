@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-validator');
 var mustacheExpress = require('mustache-express');
 var expressValidator = require('express-validator');
-var flash = require('connect-flash');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
@@ -35,26 +34,27 @@ passport.use(new LocalStrategy(function(username, password, done){
     console.log('inserted password on login page:' +
         password);
     const sql = require('./database.js');
-    sql.query('SELECT password FROM ACCOUNT where username = ?', [username], function(err, results, fields){
+    sql.query('SELECT userID, password, admin FROM ACCOUNT where username = ?', [username], function(err, results, fields){
         if (err){
             {done(err)}
         };
         if (results.length === 0){
             done(null, false);
-        }
+        } else {
 
-        var hashbae = results[0].password.toString();
-        console.log(hashbae);
-        bcrypt.compare(password, hashbae, function(err, response){
-            if (response === true){
-                console.log("hash compare true");
-                return done(null, {userID: 10});
-            }       else done(null, false);
-        });
-        return done(null, {userID: 10});
+            var hashbae = results[0].password.toString();
+            console.log(hashbae);
+            bcrypt.compare(password, hashbae, function (err, response) {
+                if (response === true) {
+                    console.log(results[0].userID.toString());
+                    return done(null, {userID: results[0].userID});
+                } else done(null, false);
+            });
+        }
+      //  return done(null, {userID: 10});
     })
 
-    return done(null, false);
+   // return done(null, false);
 }));
 
 //var mongo = require('sql');
@@ -69,8 +69,8 @@ passport.use(new LocalStrategy(function(username, password, done){
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', mustacheExpress()) // Same as file extensions (*.html)
-app.set('view engine', 'html');
+//app.engine('html', mustacheExpress()) // Same as file extensions (*.html)
+app.set('view engine', 'jade');
 
 
 // Cookie parser
@@ -143,11 +143,16 @@ app.use(expressValidator({
         };
     }
 }));
+app.use(function(req, res, next){
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+})
 
 
-app.use('/', index);
-app.use('/users', users);
 app.use('/', routes);
+//app.use('/', index);
+app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
