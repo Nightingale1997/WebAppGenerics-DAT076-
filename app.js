@@ -53,7 +53,7 @@ passport.use(new LocalStrategy(function(username, password, done){
         return done(null, {userID: 10});
     })
 
-    return done(null, false);
+    //return done(null, false);
 }));
 
 //var mongo = require('sql');
