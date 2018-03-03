@@ -1,6 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="">
+<head>
 {{ >partials/head }}
+<link rel="stylesheet" href="../stylesheets/skdslider.css">
+</head>
 <body onload="loadProducts()">
 
 {{ >partials/header}}
@@ -54,13 +57,14 @@
 
 <script>
 
-  function loadProducts(){
+    function loadProducts(){
 
-      $.get( "/index.html", function( data ) {
-          $('#productlist').html(data);
-      });
+        +      $.get( "/index.html", function( data ) {
+            +          $('#productlist').html(data);
+                  });
 
-  };
+
+     };
 
 </script>
 </body>

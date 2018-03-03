@@ -69,9 +69,9 @@ passport.use(new LocalStrategy(function(username, password, done){
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.engine('html', mustacheExpress()) // Same as file extensions (*.html)
-app.set('view engine', 'jade');
-
+app.engine('html', mustacheExpress()) // Same as file extensions (*.html)
+//app.set('view engine', 'jade');
+app.set('view engine', 'html');
 
 // Cookie parser
 app.use(cookieParser());
