@@ -20,24 +20,24 @@ router.get('/', function(req, res, next) {
         $.post("/index.html", function(data) {
             $('#cart').html(data.id);
         });
-
     };
 });
 */
 
-router.post("../index.html", function(req, res){
+router.post("/", function(req, res){
+
+    console.log('hshshs');
+
     var productId = req.id;
 
     function equals(product) {
         return product.id == productId;
     }
 
-
-
     var productToAdd = ProductList.products.find(equals);
-
-
     var shoppingCart = ShoppingCart.products;
+
+
 
 
     //Old, fix tomorrow
@@ -47,11 +47,10 @@ router.post("../index.html", function(req, res){
     var html = Mustache.to_html(template, products);
     console.log(html);
     res.send(html);
-
 });
 
 
-router.get('/index.html', (req, res) => {
+router.get('/products', (req, res) => {
     var productList = new ProductList();
     productList.addProduct(new Product(1, "Super Mario", "Italian Plumber fights mushrooms", 10, "Platformer"));
     productList.addProduct(new Product(2, "Street Fighterrr", "People fight in the streets", 15, "Fighting"));
@@ -66,9 +65,8 @@ router.get('/index.html', (req, res) => {
 
     var products = {products: products};
     var template = "{{#products}}<ul><li>Title: {{productName}}</li><li>Description: {{description}}</li><li>Price: {{price}}</li>" +
-        "<li>Genre: {{genre}}</li><button class='btn'>Shop Button</button></ul> <br> <br>{{/products}}"
+        "<li>Genre: {{genre}}</li><button id ='{{productID}}' class='btn addToCart'>Shop Button</button></ul> <br> <br>{{/products}}"
     var html = Mustache.to_html(template, products);
-    console.log(html);
     res.send(html);
 });
 

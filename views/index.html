@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js" lang="">
 <head>
-{{ >partials/head }}
+{{ >partials/head}}
 <link rel="stylesheet" href="../stylesheets/skdslider.css">
 </head>
-<body onload="loadProducts(), doCart()">
+<body onload="loadProducts()">
 
 {{ >partials/header}}
 
@@ -62,22 +62,24 @@
 
     function loadProducts(){
 
-              $.get("/index.html", function( data ) {
+              $.get("/products", function( data ) {
                       $('#productlist').html(data);
+
+                  $(".addToCart").click(function(){
+                      console.log(this.id);
+                      $.post("/",
+                          {
+                              productID: this.id
+                          },
+                          function(data){
+                              $('#cart').html(data);
+                          });
+                  });
+
                   });
      };
 
-    $(document).ready(function(){
-        $(".btn").click(function(){
-            $.post("/index.html",
-                {
-                    productID: this.id
-                },
-                function(data){
-                    $('#cart').html(data);
-                });
-        });
-    });
+
 
 </script>
 </body>
