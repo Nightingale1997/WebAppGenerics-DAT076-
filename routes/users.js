@@ -84,6 +84,23 @@ router.post('/register', function(req, res){
         });
     }
 })
+
+//Login post to handle Admin
+/*
+router.post('/login', passport.authenticate('local'), function(req, res) {
+
+    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+
+    mysql.query(sql, function(err, rows, fields){
+        if(err) throw err;
+        res.render('product', { title: 'Products', rows: rows});
+    });
+        });
+*/
+
+
+
+
 //Admin Page Handling
 router.post('/deleteProduct', function(req,res){
     //var id = res[0].ProductID.toString();
