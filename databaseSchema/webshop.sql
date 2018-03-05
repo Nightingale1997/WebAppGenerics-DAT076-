@@ -74,6 +74,7 @@ CREATE TABLE Product (
     Name varchar(200)  NOT NULL ,
     Description varchar(200)  NOT NULL ,
     Price int  NOT NULL ,
+    SalePrice double NOT NULL,
     PRIMARY KEY (ProductID)
 );
 

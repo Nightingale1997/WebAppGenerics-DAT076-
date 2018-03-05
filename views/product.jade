@@ -1,0 +1,87 @@
+extends layout
+
+block content
+
+    #DeleteProduct.center-vertical
+        form(method='POST' action='/users/deleteProduct')
+            p Delete Product ---------------------------------------------------------------------------------
+            .form-group
+                label ProductID
+                input.form-control(type='int', id='ProductID', name='ProductID')
+
+                button(type='submit').btn.btn-primary.button-delete
+                    span.glyphicon.glyphicon-lock
+                    | DELETE
+                .clearfix
+            table
+                thead
+                    tr
+                        th Name
+                        th Price
+                        th ProductID
+                        th SalePrice
+                tbody
+                    - each item in rows
+                        tr
+                        td= item.Name
+                        td= item.Price
+                        td= item.ProductID
+                        td= item.SalePrice
+
+    #AddProduct.center-vertical
+        form(method='POST' action='/users/addProduct')
+            p Add Product ---------------------------------------------------------------------------------
+            .form-group
+                label ProductID
+                    input.form-control(type='int', id='ProductIDADD', name='ProductID')
+            .form-group
+                label Name
+                    input.form-control(type='text', id='Name', name='Name')
+            .form-group
+                label Description
+                    input.form-control(type='text', id='Description', name='Description')
+            .form-group
+                label Price
+                    input.form-control(type='double', id='Price', name='Price')
+            .form-group
+                label Sale Price
+                    input.form-control(type='double', id='SalePrice', name='SalePrice')
+
+            .controls
+                button(type='submit').btn.btn-primary.button-add-product
+                    span.glyphicon.glyphicon-lock
+                    | ADD
+
+    #DeleteSale.center-vertical
+        form(method='POST' action='/users/deleteSale')
+            p Delete Sale ---------------------------------------------------------------------------------
+            .form-group
+                label ProductID
+                    input.form-control(type='int', id='ProductIDDeleteSale', name='ProductID')
+            .controls
+                button(type='submit').btn.btn-primary.button-add-sale
+                    span.glyphicon.glyphicon-lock
+                    | DELETE
+
+    #AddSale.center-vertical
+        form(method='POST' action='/users/addSale')
+            p Add Sale ---------------------------------------------------------------------------------
+            .form-group
+                label ProductID
+                    input.form-control(type='int', id='SaleIDADD', name='ProductID')
+            .form-group
+                label Sale Price
+                    input.form-control(type='double', id='SalePriceAddSale', name='SalePrice')
+            .controls
+                button(type='submit').btn.btn-primary.button-add-sale
+                    span.glyphicon.glyphicon-lock
+                    | ADD
+
+    #DeleteSaleProduct.center-vertical
+        form(method='POST' action='/users/deleteSaleProduct')
+    #AddSaleProduct.center-vertical
+        form(method='POST' action='/users/addSaleProduct')
+
+
+
+
