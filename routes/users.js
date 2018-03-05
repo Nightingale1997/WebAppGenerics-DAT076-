@@ -17,14 +17,28 @@ router.get('/login', authenticationMiddleware(),function(req, res, next) {
     res.render('profile');
 });
 
+
+//Login post to handle Admin
+
+router.post('/login', passport.authenticate('local'), function(req, res) {
+
+    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+
+    mysql.query(sql, function(err, rows, fields){
+        if(err) throw err;
+        res.render('product', { title: 'Products', rows: rows});
+    });
+        });
+
+
 //Login post
-router.post('/login', passport.authenticate('local'),
+/*router.post('/login', passport.authenticate('local'),
     function(req,res){
         res.redirect('profile');
     }
 
 );
-
+*/
 /*
 //Login succesful
 router.get('/', function(req, res) {
@@ -85,18 +99,7 @@ router.post('/register', function(req, res){
     }
 })
 
-//Login post to handle Admin
-/*
-router.post('/login', passport.authenticate('local'), function(req, res) {
 
-    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
-
-    mysql.query(sql, function(err, rows, fields){
-        if(err) throw err;
-        res.render('product', { title: 'Products', rows: rows});
-    });
-        });
-*/
 
 
 
