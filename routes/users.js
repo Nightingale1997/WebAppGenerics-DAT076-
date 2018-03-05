@@ -84,6 +84,65 @@ router.post('/register', function(req, res){
         });
     }
 })
+//Admin Page Handling
+router.post('/deleteProduct', function(req,res){
+    //var id = res[0].ProductID.toString();
+    const id = req.body.ProductID;
+    mysql.query('DELETE FROM PRODUCT WHERE ProductID=?',[id], function(err, results, fields){
+        if (err){
+            throw err;
+        };
+    })
+    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    mysql.query(sql, function(err, rows, fields){
+        if(err) throw err;
+        res.render('product', { title: 'Products', rows: rows});
+    });
+});
+
+router.post('/addProduct', function(req,res){
+
+    const ProductID = req.body.ProductID;
+    const Name = req.body.Name;
+    const Description = req.body.Description;
+    const Price = req.body.Price;
+    const SalePrice = req.body.SalePrice;
+    mysql.query('insert into product (ProductID, Name, Description, Price, SalePrice) VALUES (?, ?, ?, ?, ?)', [ProductID, Name, Description, Price, SalePrice]);
+
+    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    mysql.query(sql, function(err, rows, fields){
+        if(err) throw err;
+        res.render('product', { title: 'Sales', rows: rows});
+    });
+});
+
+router.post('/addSale', function(req,res){
+
+    const ProductID = req.body.ProductID;
+    const SalePrice = req.body.SalePrice;
+
+    mysql.query('update product SET SalePrice=? WHERE ProductID=?', [SalePrice, ProductID]);
+    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    mysql.query(sql, function(err, rows, fields){
+        if(err) throw err;
+        res.render('product', { title: 'Sales', rows: rows});
+    });
+});
+
+router.post('/deleteSale', function(req,res){
+    const ProductID = req.body.ProductID;
+
+    mysql.query('UPDATE PRODUCT SET SalePrice=0 WHERE ProductID=?', [ProductID]);
+    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    mysql.query(sql, function(err, rows, fields){
+        if(err) throw err;
+        res.render('product', { title: 'Sales', rows: rows});
+    });
+});
+
+
+
+
 /*
 passport.use(new LocalStrategy(
     function(name, password, done) {
