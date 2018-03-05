@@ -82,8 +82,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var options = {
     host: 'localhost',
     port: '3306',
-    user: 'root',
-    password: 'root',
+    user: 'hajo',
+    password: 'hajo',
     database: 'webshop'
 }
 var sessionStore = new MySQLStore(options);

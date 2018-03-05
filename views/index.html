@@ -4,7 +4,7 @@
 {{ >partials/head }}
 <link rel="stylesheet" href="../stylesheets/skdslider.css">
 </head>
-<body onload="loadProducts()">
+<body onload="loadProducts(), doCart()">
 
 {{ >partials/header}}
 
@@ -29,10 +29,11 @@
 
 <div class="wrapper">
     <section></section>
-    <!-- Add your site or application content here -->
+    <!-- Add your site or application content here <ul id="productlist">
+     <a href="#" class="btn btn-default" role="button">Button</a>-->
     <ul id="productlist"></ul>
     <p>Add Categories</p>
-    <p>Display products to the right?</p>
+    <p>Display products to the right???</p>
 
 </div>
 {{ >partials/footer }}
@@ -59,12 +60,42 @@
 
     function loadProducts(){
 
-        +      $.get( "/index.html", function( data ) {
-            +          $('#productlist').html(data);
+              $.get("/index.html", function( data ) {
+                      $('#productlist').html(data);
                   });
-
-
      };
+
+
+    $(".btn").click(function() {
+            $.post( "/index.html", function( data ) {
+                $('#cart').html(data.id);
+            });
+
+    });
+
+ /*   function updateCart(){
+        $.get("/index.html", function (data) {
+            $('#btn').onclick(data);
+
+        });
+    };
+
+    $(document).ready(function () {
+        //your code here
+        $(".btn").click(function() {
+            doCart();
+        });
+    });
+        $(".btn").click(function() {
+        function doCart(){
+
+            $.post( "/index.html", function( data ) {
+                $('#cart').html(data.id);
+            });
+
+        };
+    });
+    */
 
 </script>
 </body>
