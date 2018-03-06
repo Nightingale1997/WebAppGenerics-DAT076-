@@ -3,7 +3,7 @@ var router = express.Router();
 var Product = require('../models/Product');
 var ProductList = require('../models/ProductList');
 var Mustache = require('mustache');
-var ShoppingCart = require('../models/ShoppingCart');
+
 const mysql = require('../database.js');
 
 
@@ -32,8 +32,8 @@ router.post("/", function(req, res, next){
     //router.get("../index.html", function(req, res, next){
 
 
-    var productID = req.body.id;
 
+    var productID = req.body.productID;
     mysql.query('SELECT * FROM product WHERE ProductID = ?', [productID], function(error, results, fields){
         if (error){
             console.log('error #2');
@@ -42,45 +42,59 @@ router.post("/", function(req, res, next){
 
         var productToAdd = results[0];
 
+        productToAdd = new Product(productToAdd.ProductID, productToAdd.Name, productToAdd.Description, productToAdd.Price, productToAdd.SalePrice);
+        var ShoppingCart = require('../models/ShoppingCart');
+        ShoppingCart.addProduct(productToAdd);
+
+        console.log('Cool');
+
+
+        var ShoppingCart = {ShoppingCart: ShoppingCart};
+        var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}<ul><li>Title: {{products.0.0.productName}}</li><li>Description: {{products.0.0.description}}</li><li>Price: {{products.0.0.price}} each</li>" +
+            "<li>Genre: {{products.0.0.genre}}</li><li>Quantitity {{products.0.1}}</li></ul> <br> <br>{{/ShoppingCart}}";
+        var html = Mustache.to_html(template, ShoppingCart);
+        console.log(html);
+        res.send(html);
+
         });
 
-    productToAdd = new Product();
-    ShoppingCart.addProduct(productToAdd);
-    var shoppingCart = ShoppingCart.products;
-    console.log('Cool');
+
+
 
 
 
     //Old, fix tomorrow
     /*
-    var products = {products: products};
-    var template = "{{#products}}<ul><li>Title: {{productName}}</li><li>Description: {{description}}</li><li>Price: {{price}}</li>" +
-        "<li>Genre: {{genre}}</li><button class='btn'>Shop Button</button></ul> <br> <br>{{/products}}";
-    var html = Mustache.to_html(template, products);
-    console.log(html);
-    res.send(html);
+
     */
 });
 
 
 router.get('/products', (req, res) => {
-    var productList = new ProductList();
-    productList.addProduct(new Product(1, "Super Mario", "Italian Plumber fights mushrooms", 10, "Platformer"));
-    productList.addProduct(new Product(2, "Street Fighterrr", "People fight in the streets", 15, "Fighting"));
-    productList.addProduct(new Product(3, "Tomb Raider", "Fight for survival", 25, "Survive"));
 
-    var products = productList.products;
+
+    mysql.query('SELECT * FROM product', function(error, results, fields){
+        if (error){
+            console.log('error #2');
+            throw error;
+        }
+
+        var products = results;
+        var products = {products: products};
+        var template = "{{#products}}<ul><li>Title: {{Name}}</li><li>Description: {{Description}}</li><li>Price: {{Price}}</li>" +
+            "<li>Genre: {{genre}}</li><button id ='{{ProductID}}' class='btn addToCart'>Shop Button</button></ul> <br> <br>{{/products}}"
+        var html = Mustache.to_html(template, products);
+        res.send(html);
+    });
+
+
    /* var html = "";
     products.forEach(function(element) {
         html += "<ul><li>Title: "+ element.productName +"</li><li>Description: "+ element.description +"</li><li>Price: "+ element.price +" Euro</li><li>Genre: "+ element.genre +"</li></ul><br><br>";
     });*/
 
 
-    var products = {products: products};
-    var template = "{{#products}}<ul><li>Title: {{productName}}</li><li>Description: {{description}}</li><li>Price: {{price}}</li>" +
-        "<li>Genre: {{genre}}</li><button id ='{{productID}}' class='btn addToCart'>Shop Button</button></ul> <br> <br>{{/products}}"
-    var html = Mustache.to_html(template, products);
-    res.send(html);
+
 });
 
 module.exports = router;

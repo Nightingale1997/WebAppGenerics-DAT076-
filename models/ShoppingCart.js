@@ -37,27 +37,22 @@ class ShoppingCart{
     addProduct(product){
 
 
-        var storedItem = this.items[id];
-        if(!storedItem){
-            storedItem = this.item[id] = {item: item, qty: 0, price: 0};
-        }
-        storedItem.qty++;
-        storedItem.price = storedItem.item.price * storedItem.qty;
-        this.totQty++;
-        this.totPrice += storedItem.item.price;
-
-
-        if(!product){
-            currentProduct = [product, 1];
-            this.products.push(currentProduct);
-        }
-        else{
-            this.products[product.id][[1]+1];
-        }
-
         this.totQty++;
         this.totPrice += product.price;
+
+        this.products.forEach(function(entry) {
+            if(entry[0].productID == product.productID){
+                entry[1] += 1;
+                return
+            }
+        });
+
+        product = [product, 1];
+        this.products.push(product);
+
     }
 };
 
-module.exports = ShoppingCart;
+var shoppingCart = new ShoppingCart();
+
+module.exports = shoppingCart;

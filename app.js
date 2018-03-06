@@ -23,8 +23,13 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+
 var routes =  require('./routes/index');
 var users = require('./routes/users');
+
+
+
 
 
 passport.use(new LocalStrategy(function(username, password, done){
