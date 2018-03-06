@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Product = require('../models/Product');
-var ProductList = require('../models/ProductList');
 var Mustache = require('mustache');
 
 const mysql = require('../database.js');
