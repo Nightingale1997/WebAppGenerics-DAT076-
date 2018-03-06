@@ -67,19 +67,17 @@
 
                   $(".addToCart").click(function(){
                       console.log(this.id);
+                      console.log(this.shoppingCart);
                       $.post("/",
                           {
-                              productID: this.id
                           },
                           function(data){
                               $('#cart').html(data);
                           });
                   });
 
-                  });
+              });
      };
-
-
 
 </script>
 </body>

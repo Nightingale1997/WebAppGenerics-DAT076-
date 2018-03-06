@@ -4,49 +4,62 @@ var Product = require('../models/Product');
 var ProductList = require('../models/ProductList');
 var Mustache = require('mustache');
 var ShoppingCart = require('../models/ShoppingCart');
+const mysql = require('../database.js');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* add to cart */
+/*
+    var productID = req.body.id;
+    var cart = new ShoppingCart(req.body.cart ? req.body.cart : {items: {}});
 
-// $.get("/index.html", function (req, res, next) router.get(function (req, res, next)
-
- /*$(".btn").click(function() {
-    function updateCart(){
-
-        $.post("/index.html", function(data) {
-            $('#cart').html(data.id);
-        });
-    };
-});
+    Product.findbyId(productID, function (err, product) {
+        if (err) {
+            return res.redirect('../views/index');
+        }
+        cart.addProduct(product, product.id);
+        req.body.cart = cart;
+        console.log(req.body.cart);
+        res.redirect('/../views/index');
+    });
 */
 
-router.post("/", function(req, res){
+router.post("/", function(req, res, next){
 
-    console.log('hshshs');
+    //router.get("../index.html", function(req, res, next){
 
-    var productId = req.id;
 
-    function equals(product) {
-        return product.id == productId;
-    }
+    var productID = req.body.id;
 
-    var productToAdd = ProductList.products.find(equals);
+    mysql.query('SELECT * FROM product WHERE ProductID = ?', [productID], function(error, results, fields){
+        if (error){
+            console.log('error #2');
+            throw error;
+        }
+
+        var productToAdd = results[0];
+
+        });
+
+    productToAdd = new Product();
+    ShoppingCart.addProduct(productToAdd);
     var shoppingCart = ShoppingCart.products;
-
+    console.log('Cool');
 
 
 
     //Old, fix tomorrow
+    /*
     var products = {products: products};
     var template = "{{#products}}<ul><li>Title: {{productName}}</li><li>Description: {{description}}</li><li>Price: {{price}}</li>" +
-        "<li>Genre: {{genre}}</li><button class='btn'>Shop Button</button></ul> <br> <br>{{/products}}"
+        "<li>Genre: {{genre}}</li><button class='btn'>Shop Button</button></ul> <br> <br>{{/products}}";
     var html = Mustache.to_html(template, products);
     console.log(html);
     res.send(html);
+    */
 });
 
 

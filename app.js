@@ -17,7 +17,6 @@ var users = require('./routes/users');
 var db = require('./controllers/db');
 var app = express();
 
-
 // Make it possible to access a session object in Mustache templates
 app.use(function(req, res, next) {
     res.locals.session = req.session;
@@ -82,8 +81,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var options = {
     host: 'localhost',
     port: '3306',
-    user: 'hajo',
-    password: 'hajo',
+    user: 'root',
+    password: 'root',
     database: 'webshop'
 }
 var sessionStore = new MySQLStore(options);
