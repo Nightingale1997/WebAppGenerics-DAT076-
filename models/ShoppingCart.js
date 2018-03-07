@@ -34,21 +34,29 @@ class ShoppingCart{
         this.totPrice = 0;
     }
 
+
     addProduct(product){
 
 
         this.totQty++;
         this.totPrice += product.price;
 
+        var found = false;
+
         this.products.forEach(function(entry) {
             if(entry[0].productID == product.productID){
                 entry[1] += 1;
-                return
+                found = true;
+                return;
             }
         });
 
-        product = [product, 1];
-        this.products.push(product);
+        if(!found){
+            product = [product, 1];
+            this.products.push(product);
+        }
+
+
 
     }
 };

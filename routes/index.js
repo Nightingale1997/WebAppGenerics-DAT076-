@@ -49,8 +49,8 @@ router.post("/", function(req, res, next){
 
 
         var ShoppingCart = {ShoppingCart: ShoppingCart};
-        var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}<ul><li>Title: {{products.0.0.productName}}</li><li>Description: {{products.0.0.description}}</li><li>Price: {{products.0.0.price}} each</li>" +
-            "<li>Genre: {{products.0.0.genre}}</li><li>Quantitity {{products.0.1}}</li></ul> <br> <br>{{/ShoppingCart}}";
+        var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}{{#products}}<ul><li>Title: {{0.productName}}</li><li>Description: {{0.description}}</li><li>Price: {{0.price}} each</li>" +
+            "<li>Genre: {{0.genre}}</li><li>Quantitity {{1}}</li></ul>{{/products}}<li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><ul></ul> <br> <br>{{/ShoppingCart}}";
         var html = Mustache.to_html(template, ShoppingCart);
         console.log(html);
         res.send(html);
