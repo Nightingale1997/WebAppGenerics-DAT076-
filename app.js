@@ -12,8 +12,9 @@ var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
-var index = require('./routes/index');
+var index =  require('./routes/index');
 var users = require('./routes/users');
+var search = require('./routes/search');
 var db = require('./controllers/db');
 var app = express();
 
@@ -22,15 +23,6 @@ app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
-
-
-
-var routes =  require('./routes/index');
-var users = require('./routes/users');
-
-
-
-
 
 passport.use(new LocalStrategy(function(username, password, done){
     console.log('inserted username on login page:' +
@@ -153,9 +145,10 @@ app.use(function(req, res, next){
 })
 
 
-app.use('/', routes);
-//app.use('/', index);
+//app.use('/', routes);
+app.use('/', index);
 app.use('/users', users);
+app.use('/search', search);
 
 
 // catch 404 and forward to error handler

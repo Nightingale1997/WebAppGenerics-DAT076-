@@ -57,11 +57,6 @@ router.post("/", function(req, res, next){
 
         });
 
-
-
-
-
-
     //Old, fix tomorrow
     /*
 

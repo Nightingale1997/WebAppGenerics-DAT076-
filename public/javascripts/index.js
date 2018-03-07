@@ -4,8 +4,6 @@ jQuery(document).ready(function(){
 
     jQuery('#bannerslider').skdslider({delay:5000, animationSpeed: 1000,'pauseOnHover': true, showNextPrev:true,showPlayButton:false, showNav: true, autoSlide:false,animationType:'sliding'});
 
-
-
 });
 
 function loadProducts(){
