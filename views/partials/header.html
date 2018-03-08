@@ -1,6 +1,6 @@
 <header>
     <div class="wrapper">
-        <div class="headerlogo"><a href="/index/"><img src="../images/Logo/LogoHorizontal.png"> </a></div>
+        <div class="headerlogo"><a href="../"><img src="../images/Logo/LogoHorizontal.png"> </a></div>
 
         <div class="headersearchbar">
             <div>
@@ -14,7 +14,12 @@
             <a href="../users/login"><button class="coloredbutton">Sign in</button></a>
             <a href="../users/register"><button>Register</button></a>
             <a href="../users/profile"><button>Profile</button></a>
-            <a href="../users/cart.html"><button class="cart"><img src="../images/icons/shoppingcart.png"></button></a>
+            <div class="dropdown">
+                               <button class="dropbtn"><img src="../images/icons/shoppingcart.png"></button>
+                              <div id="cart" class="dropdown-content">
+                                  <article>There are no items in your cart</article>
+                               </div>
+                           </div>
         </div>
     </div>
 </header>

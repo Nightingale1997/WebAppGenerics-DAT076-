@@ -190,11 +190,11 @@ button img{
     width:26%;
 }
 .headerbuttongroup button{
-    margin-right:10%;
+    margin-right:3.5%;
 }
-
-.headerbuttongroup .cart{
-    width: 17.5%
+.headerbuttongroup .dropdown{
+    width: 17.5%;
+    display: inline-block;
 }
 button{
     border:none;
@@ -251,7 +251,46 @@ p{
 
 
 
+.dropbtn {
+    padding: 15% 15%;
+    color: white;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+}
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right:0;
+    background-color: #27282e;
+    min-width: 550%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content article {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropbtn:hover {
+    background: #27282e;
+}
+
+.dropdown:hover{
+    background: #27282e;
+}
+
+.dropdown:hover .dropdown-content {
+
+    display: block;
+}
 
 
 
