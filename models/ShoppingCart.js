@@ -27,36 +27,32 @@ module.exports = function ShoppingCart(oldCart) {
 */
 
 // Constructor
-class ShoppingCart{
+class ShoppingCart {
     constructor() {
         this.products = [];
         this.totQty = 0;
         this.totPrice = 0;
     }
 
-
-    addProduct(product){
-
+    addProduct(product) {
 
         this.totQty++;
         this.totPrice += product.price;
 
         var found = false;
 
-        this.products.forEach(function(entry) {
-            if(entry[0].productID == product.productID){
+        this.products.forEach(function (entry) {
+            if (entry[0].productID == product.productID) {
                 entry[1] += 1;
                 found = true;
                 return;
             }
         });
 
-        if(!found){
+        if (!found) {
             product = [product, 1];
             this.products.push(product);
         }
-
-
 
     }
 };

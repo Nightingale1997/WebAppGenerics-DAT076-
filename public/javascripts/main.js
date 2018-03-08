@@ -1,8 +1,16 @@
 jQuery(document).ready(function () {
 
-    $.get("/", function (data) {
+
+
+});
+    function searchProducts(){
+    $.get("/products/", function (data) {
         $('#productSearch').html(data);
         $("#searchButton").click(function () {
+            //setTimeout(function(){document.location.href = 'search'},500);
+            window.location.href='/search/', true;
+
+            /*
             console.log(this.id);
             $.post("/",
                 {
@@ -11,25 +19,12 @@ jQuery(document).ready(function () {
                 function (data) {
                     $('#cart').html(data);
                 });
+                */
         });
 
     });
 
-
-    router.post("/", function(req, res, next) {
-
-        var productID = req.body.productID;
-        mysql.query('SELECT * FROM product WHERE ProductID = ?', [productID], function (error, results, fields) {
-            if (error) {
-                console.log('error #2');
-                throw error;
-            }
-
-        });
-
-    });
-
-});
+    };
 
 
         // var search = new Search($('#search-bar').val());
