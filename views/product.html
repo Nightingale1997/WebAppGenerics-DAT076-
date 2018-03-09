@@ -31,7 +31,7 @@
 <td></td>
 <td></td>
 <div class="center-vertical" id="AddProduct"></div>
-<form method="POST" action="/users/addProduct"></form>
+<form method="POST" action="/users/addProduct">
 <p>Add Product ---------------------------------------------------------------------------------</p>
 <div class="form-group"></div>
 <label>ProductID</label>
@@ -50,16 +50,18 @@
 <input class="form-control" type="double" id="SalePrice" name="SalePrice"/>
 <div class="controls"></div>
 <button class="btn btn-primary button-add-product" type="submit"></button><span class="glyphicon glyphicon-lock"></span>ADD
+</form>
 <div class="center-vertical" id="DeleteSale"></div>
-<form method="POST" action="/users/deleteSale"></form>
+<form method="POST" action="/users/deleteSale">
 <p>Delete Sale ---------------------------------------------------------------------------------</p>
 <div class="form-group"></div>
 <label>ProductID</label>
 <input class="form-control" type="int" id="ProductIDDeleteSale" name="ProductID"/>
 <div class="controls"></div>
 <button class="btn btn-primary button-add-sale" type="submit"></button><span class="glyphicon glyphicon-lock"></span>DELETE
+</form>
 <div class="center-vertical" id="AddSale"></div>
-<form method="POST" action="/users/addSale"></form>
+<form method="POST" action="/users/addSale">
 <p>Add Sale ---------------------------------------------------------------------------------</p>
 <div class="form-group"></div>
 <label>ProductID</label>
@@ -69,10 +71,13 @@
 <input class="form-control" type="double" id="SalePriceAddSale" name="SalePrice"/>
 <div class="controls"></div>
 <button class="btn btn-primary button-add-sale" type="submit"></button><span class="glyphicon glyphicon-lock"></span>ADD
+</form>
 <div class="center-vertical" id="DeleteSaleProduct"></div>
-<form method="POST" action="/users/deleteSaleProduct"></form>
+<form method="POST" action="/users/deleteSaleProduct">
 <div class="center-vertical" id="AddSaleProduct"></div>
-<form method="POST" action="/users/addSaleProduct"></form>
+</form>
+<form method="POST" action="/users/addSaleProduct">
+</form>
 
 </div>
 
