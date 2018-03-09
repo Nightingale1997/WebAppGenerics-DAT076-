@@ -1,0 +1,83 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    {{ >partials/head}}
+    <link rel="stylesheet" href="../stylesheets/skdslider.css">
+</head>
+<body>
+
+{{ >partials/header}}
+
+<div class="wrapper">
+<div class="center-vertical" id="DeleteProduct"></div>
+<form method="POST" action="/users/deleteProduct"></form>
+<p>Delete Product ---------------------------------------------------------------------------------</p>
+<div class="form-group"></div>
+<label>ProductID</label>
+<input class="form-control" type="int" id="ProductID" name="ProductID"/>
+<button class="btn btn-primary button-delete" type="submit"></button><span class="glyphicon glyphicon-lock"></span>DELETE
+<div class="clearfix"></div>
+<table></table>
+<thead></thead>
+<tr></tr>
+<th>Name</th>
+<th>Price</th>
+<th>ProductID</th>
+<th>SalePrice</th>
+<tbody></tbody>
+<tr></tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<div class="center-vertical" id="AddProduct"></div>
+<form method="POST" action="/users/addProduct"></form>
+<p>Add Product ---------------------------------------------------------------------------------</p>
+<div class="form-group"></div>
+<label>ProductID</label>
+<input class="form-control" type="int" id="ProductIDADD" name="ProductID"/>
+<div class="form-group"></div>
+<label>Name</label>
+<input class="form-control" type="text" id="Name" name="Name"/>
+<div class="form-group"></div>
+<label>Description</label>
+<input class="form-control" type="text" id="Description" name="Description"/>
+<div class="form-group"></div>
+<label>Price</label>
+<input class="form-control" type="double" id="Price" name="Price"/>
+<div class="form-group"></div>
+<label>Sale Price</label>
+<input class="form-control" type="double" id="SalePrice" name="SalePrice"/>
+<div class="controls"></div>
+<button class="btn btn-primary button-add-product" type="submit"></button><span class="glyphicon glyphicon-lock"></span>ADD
+<div class="center-vertical" id="DeleteSale"></div>
+<form method="POST" action="/users/deleteSale"></form>
+<p>Delete Sale ---------------------------------------------------------------------------------</p>
+<div class="form-group"></div>
+<label>ProductID</label>
+<input class="form-control" type="int" id="ProductIDDeleteSale" name="ProductID"/>
+<div class="controls"></div>
+<button class="btn btn-primary button-add-sale" type="submit"></button><span class="glyphicon glyphicon-lock"></span>DELETE
+<div class="center-vertical" id="AddSale"></div>
+<form method="POST" action="/users/addSale"></form>
+<p>Add Sale ---------------------------------------------------------------------------------</p>
+<div class="form-group"></div>
+<label>ProductID</label>
+<input class="form-control" type="int" id="SaleIDADD" name="ProductID"/>
+<div class="form-group"></div>
+<label>Sale Price</label>
+<input class="form-control" type="double" id="SalePriceAddSale" name="SalePrice"/>
+<div class="controls"></div>
+<button class="btn btn-primary button-add-sale" type="submit"></button><span class="glyphicon glyphicon-lock"></span>ADD
+<div class="center-vertical" id="DeleteSaleProduct"></div>
+<form method="POST" action="/users/deleteSaleProduct"></form>
+<div class="center-vertical" id="AddSaleProduct"></div>
+<form method="POST" action="/users/addSaleProduct"></form>
+
+</div>
+
+{{ >partials/footer }}
+
+{{ >partials/scripts }}
+</body>
+</html>
