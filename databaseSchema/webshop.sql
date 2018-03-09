@@ -5,6 +5,11 @@
 -- Modify the code to update the DB schema diagram.
 -- To reset the sample schema, replace everything with
 -- two dots ('..' - without quotes).
+drop DATABASE webshop;
+
+create DATABASE webshop;
+
+use webshop;
 
 CREATE TABLE account
 (

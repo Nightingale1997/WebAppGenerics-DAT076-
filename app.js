@@ -12,21 +12,17 @@ var MySQLStore = require('express-mysql-session')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
-var index = require('./routes/index');
+var index =  require('./routes/index');
 var users = require('./routes/users');
+var search = require('./routes/search');
 var db = require('./controllers/db');
 var app = express();
-
 
 // Make it possible to access a session object in Mustache templates
 app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
-
-var routes =  require('./routes/index');
-var users = require('./routes/users');
-
 
 passport.use(new LocalStrategy(function(username, password, done){
     console.log('inserted username on login page:' +
@@ -69,9 +65,9 @@ passport.use(new LocalStrategy(function(username, password, done){
 
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.engine('html', mustacheExpress()) // Same as file extensions (*.html)
-app.set('view engine', 'jade');
-
+app.engine('html', mustacheExpress()) // Same as file extensions (*.html)
+//app.set('view engine', 'jade');
+app.set('view engine', 'html');
 
 // Cookie parser
 app.use(cookieParser());
@@ -149,9 +145,10 @@ app.use(function(req, res, next){
 })
 
 
-app.use('/', routes);
-//app.use('/', index);
+//app.use('/', routes);
+app.use('/', index);
 app.use('/users', users);
+app.use('/search', search);
 
 
 // catch 404 and forward to error handler
@@ -171,9 +168,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-
 
 
 // Set Port

@@ -1,22 +1,25 @@
 <header>
     <div class="wrapper">
-        <div class="headerlogo"><a href="index.html"><img src="images/Logo/LogoHorizontal.png"> </a></div>
+        <div class="headerlogo"><a href="../"><img src="../images/Logo/LogoHorizontal.png"> </a></div>
 
         <div class="headersearchbar">
             <div>
-                <input type="search" placeholder="Search stuff">
-                <button><img src="images/icons/search.png"></button>
+                <input id="search-bar" type="search" onkeyup="findGame()" placeholder="Search stuff">
+                <button id="searchButton"><img src="../images/icons/search.png"></button>
 
             </div>
         </div>
 
         <div class="headerbuttongroup">
-            <a href="login.html>"><button class="coloredbutton">Sign in</button></a>
-            <a href="register.html"><button>Register</button></a>
-
-            <a href=""cart.html><button class="cart"><img src="images/icons/shoppingcart.png"> </button></a>
+            <a href="../users/login"><button class="coloredbutton">Sign in</button></a>
+            <a href="../users/register"><button>Register</button></a>
+            <a href="../users/profile"><button>Profile</button></a>
+            <div class="dropdown">
+                               <button class="dropbtn"><img src="../images/icons/shoppingcart.png"></button>
+                              <div id="cart" class="dropdown-content">
+                                  <article>There are no items in your cart</article>
+                               </div>
+                           </div>
         </div>
-
-
     </div>
 </header>

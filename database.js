@@ -4,9 +4,9 @@ var connection = mysql.createConnection({
     user: 'root',
     password: 'root',
     database: 'webshop'
-})
+});
 
-connection.connect()
+connection.connect();
 
 module.exports = connection;
 

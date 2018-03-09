@@ -1,6 +1,9 @@
 <!doctype html>
 <html class="no-js" lang="">
-{{ >partials/head }}
+<head>
+{{ >partials/head}}
+<link rel="stylesheet" href="../stylesheets/skdslider.css">
+</head>
 <body onload="loadProducts()">
 
 {{ >partials/header}}
@@ -26,42 +29,19 @@
 
 <div class="wrapper">
     <section></section>
-    <!-- Add your site or application content here -->
+    <!-- Add your site or application content here <ul id="productlist">
+     <a href="#" class="btn btn-default" role="button">Button</a>-->
+
     <ul id="productlist"></ul>
     <p>Add Categories</p>
-    <p>Display products to the right?</p>
+    <p>Display products to the right???</p>
 
 </div>
 {{ >partials/footer }}
 
 {{ >partials/scripts }}
-
+<script src="javascripts/index.js"></script>
 <script src="javascripts/skdslider.js"></script>
-<script>
-
-
-    jQuery(document).ready(function(){
-
-        jQuery('#bannerslider').skdslider({delay:5000, animationSpeed: 1000,'pauseOnHover': true, showNextPrev:true,showPlayButton:false, showNav: true, autoSlide:false,animationType:'sliding'});
-
-
-
-    });
-
-</script>
-
-
-
-<script>
-
-  function loadProducts(){
-
-      $.get( "/index.html", function( data ) {
-          $('#productlist').html(data);
-      });
-
-  };
-
-</script>
+<script src="javascripts/main.js"></script>
 </body>
 </html>

@@ -128,7 +128,6 @@ router.post('/addProduct', function(req,res){
     const Price = req.body.Price;
     const SalePrice = req.body.SalePrice;
     mysql.query('insert into product (ProductID, Name, Description, Price, SalePrice) VALUES (?, ?, ?, ?, ?)', [ProductID, Name, Description, Price, SalePrice]);
-
     var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
     mysql.query(sql, function(err, rows, fields){
         if(err) throw err;
