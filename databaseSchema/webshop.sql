@@ -80,6 +80,7 @@ CREATE TABLE Product (
     Description varchar(200)  NOT NULL ,
     Price int  NOT NULL ,
     SalePrice double NOT NULL,
+    Genre varchar(200)  NOT NULL ,
     PRIMARY KEY (ProductID)
 );
 

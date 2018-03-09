@@ -74,7 +74,7 @@ router.get('/products', (req, res) => {
         var products = results;
         var products = {products: products};
         var template = "{{#products}}<ul><li>Title: {{Name}}</li><li>Description: {{Description}}</li><li>Price: {{Price}}</li>" +
-            "<li>Genre: {{genre}}</li><button id ='{{ProductID}}' class='btn addToCart'>Shop Button</button></ul> <br> <br>{{/products}}"
+            "<li>Genre: {{Genre}}</li><button id ='{{ProductID}}' class='btn addToCart'>Shop Button</button></ul> <br> <br>{{/products}}"
         var html = Mustache.to_html(template, products);
         res.send(html);
     });

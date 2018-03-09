@@ -10,12 +10,13 @@
 
 <div class="wrapper">
 <div class="center-vertical" id="DeleteProduct"></div>
-<form method="POST" action="/users/deleteProduct"></form>
+<form method="POST" action="/users/deleteProduct">
 <p>Delete Product ---------------------------------------------------------------------------------</p>
 <div class="form-group"></div>
 <label>ProductID</label>
 <input class="form-control" type="int" id="ProductID" name="ProductID"/>
 <button class="btn btn-primary button-delete" type="submit"></button><span class="glyphicon glyphicon-lock"></span>DELETE
+</form>
 <div class="clearfix"></div>
 <table></table>
 <thead></thead>
@@ -31,7 +32,9 @@
 <td></td>
 <td></td>
 <div class="center-vertical" id="AddProduct"></div>
-<form method="POST" action="/users/addProduct">
+
+
+<form method="POST" action="/users/addProduct" enctype="multipart/form-data">
 <p>Add Product ---------------------------------------------------------------------------------</p>
 <div class="form-group"></div>
 <label>ProductID</label>
@@ -48,9 +51,16 @@
 <div class="form-group"></div>
 <label>Sale Price</label>
 <input class="form-control" type="double" id="SalePrice" name="SalePrice"/>
-<div class="controls"></div>
+    <div class="form-group"></div>
+    <label>Genre</label>
+    <input class="form-control" type="text" id="Genre" name="Genre"/>
+    <div class="form-group"></div>
+    <label>Image</label>
+    <input type="file" name="productImage" accept="image/x-png" />
+    <div class="controls"></div>
 <button class="btn btn-primary button-add-product" type="submit"></button><span class="glyphicon glyphicon-lock"></span>ADD
 </form>
+
 <div class="center-vertical" id="DeleteSale"></div>
 <form method="POST" action="/users/deleteSale">
 <p>Delete Sale ---------------------------------------------------------------------------------</p>

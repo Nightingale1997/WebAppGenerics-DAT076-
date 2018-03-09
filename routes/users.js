@@ -5,6 +5,12 @@ var LocalStrategy = require('passport-local').Strategy;
 const mysql = require('../database.js');
 var expressValidator = require('express-validator');
 var bcrypt = require('bcryptjs');
+var path = require('path');
+var fs = require('fs');
+var os = require('os');
+var express = require('express');
+var app = express();
+var multer = require('multer');
 
 //Reg
 router.get('/register', function(req, res, next) {
@@ -108,6 +114,10 @@ router.post('/register', function(req, res){
 router.post('/deleteProduct', function(req,res){
     //var id = res[0].ProductID.toString();
     const id = req.body.ProductID;
+
+    var filePath = __dirname+'/../public/images/products/'+id+'.png';
+    fs.unlink(filePath);
+
     mysql.query('DELETE FROM PRODUCT WHERE ProductID=?',[id], function(err, results, fields){
         if (err){
             throw err;
@@ -116,21 +126,39 @@ router.post('/deleteProduct', function(req,res){
     var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
     mysql.query(sql, function(err, rows, fields){
         if(err) throw err;
+
         res.render('product', { title: 'Products', rows: rows});
     });
 });
 
-router.post('/addProduct', function(req,res){
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, __dirname+'/../public/images/products/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.body.ProductID + '.png')
+    }
+})
+
+var upload = multer({ storage: storage })
+
+
+router.post('/addProduct', upload.any(), function(req,res){
+
 
     const ProductID = req.body.ProductID;
     const Name = req.body.Name;
     const Description = req.body.Description;
     const Price = req.body.Price;
     const SalePrice = req.body.SalePrice;
-    mysql.query('insert into product (ProductID, Name, Description, Price, SalePrice) VALUES (?, ?, ?, ?, ?)', [ProductID, Name, Description, Price, SalePrice]);
-    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    const Genre = req.body.Genre;
+
+    mysql.query('insert into product (ProductID, Name, Description, Price, SalePrice, Genre) VALUES (?, ?, ?, ?, ?, ?)', [ProductID, Name, Description, Price, SalePrice, Genre]);
+    var sql = 'SELECT * from product';
     mysql.query(sql, function(err, rows, fields){
         if(err) throw err;
+
         res.render('product', { title: 'Sales', rows: rows});
     });
 });
@@ -141,7 +169,7 @@ router.post('/addSale', function(req,res){
     const SalePrice = req.body.SalePrice;
 
     mysql.query('update product SET SalePrice=? WHERE ProductID=?', [SalePrice, ProductID]);
-    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    var sql = 'SELECT * from product';
     mysql.query(sql, function(err, rows, fields){
         if(err) throw err;
         res.render('product', { title: 'Sales', rows: rows});
@@ -152,7 +180,7 @@ router.post('/deleteSale', function(req,res){
     const ProductID = req.body.ProductID;
 
     mysql.query('UPDATE PRODUCT SET SalePrice=0 WHERE ProductID=?', [ProductID]);
-    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+    var sql = 'SELECT * from product';
     mysql.query(sql, function(err, rows, fields){
         if(err) throw err;
         res.render('product', { title: 'Sales', rows: rows});
