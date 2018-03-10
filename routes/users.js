@@ -36,6 +36,102 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
     });
         });
 
+//register clicked on login page
+router.get('/signup', function(req,res){
+    res.render('register');
+});
+
+
+//Forgot password clicked on login page
+router.get('/forgot', function(req,res){
+    res.render('forgot');
+});
+
+router.post('/forgot', function(req, res, next) {
+    async.waterfall([
+        function(done) {
+            crypto.randomBytes(20, function(err, buf) {
+                var token = buf.toString('hex');
+                done(err, token);
+            });
+        },
+        function(token, done) {
+            const email = req.body.email;
+            mysql.query('SELECT COUNT(*) AS EmailsCount FROM account WHERE Email=(?)', [email], function(err, res) {
+                if (res[0].EmailsCount == 0) {
+                }
+
+
+               mysql.query('UPDATE account SET token=? WHERE Email=?', [token, email]);
+                // Could also add exp. date
+
+                var smtpTransport = nodemailer.createTransport({
+                    service: 'Gmail',
+                    auth: {
+                        user: 'GenericGamingShop@gmail.com',
+                        pass: '123generic'
+                    }
+                });
+                var mailOptions = {
+                    to: req.body.email,
+                    from: 'GenericGamingShop@gmail.com',
+                    subject: 'Password Reset',
+                    text: 'Here is a link to change your password ' +
+                    'http://' + req.headers.host + '/users/reset/' + token + '\n\n'
+                };
+                smtpTransport.sendMail(mailOptions, function(err) {
+                    req.flash('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+                    done(err, 'done');
+                });
+            });
+        },
+        function(token, user, done) {
+        }
+    ], function(err) {
+        if (err) return next(err);
+        res.redirect('/');
+    });
+
+});
+
+
+router.get('/reset/:token', function(req, res) {
+    mysql.query('SELECT COUNT(*) AS resetToken FROM account WHERE token=(?)', [req.params.token], function(err, res) {
+        if(res[0].resetToken == 0){
+            console.log("Nice try bud!");
+            return;
+        }
+    });
+    res.render('reset', {token: req.params.token});
+});
+
+router.post('/reset/:token', function(req, res) {
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+
+        mysql.query('UPDATE account SET Password=? WHERE token=?', [hash, req.params.token], function (req, res) {
+        });
+    });
+
+    var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'GenericGamingShop@gmail.com',
+            pass: '123generic'
+        }
+    });
+    mysql.query('SELECT * FROM account WHERE token=?', [req.params.token], function(req, res) {
+        var mailOptions = {
+            to: res[0].Email,
+            from: 'GenericGamingShop@gmail.com',
+            subject: 'Your password has been changed',
+            text: 'Hello,\n\n' +
+            'This is a confirmation that the password for your account ' + res[0].Email + ' has just been changed.\n'
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+        });
+    });
+});
+
 
 //Login post
 /*router.post('/login', passport.authenticate('local'),
