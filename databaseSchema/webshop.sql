@@ -87,3 +87,10 @@ CREATE TABLE Product (
     PRIMARY KEY (ProductID)
 );
 
+CREATE TABLE gmailPassword (
+  GMPass text NOT NULL
+);
+
+insert into gmailPassword (GMPass) VALUES ('X');
+
+select * from gmailPassword;
