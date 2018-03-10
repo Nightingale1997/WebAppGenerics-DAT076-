@@ -11,6 +11,14 @@ var os = require('os');
 var express = require('express');
 var app = express();
 var multer = require('multer');
+var async = require('async');
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+//Get authoritative mail
+var PASS;
+mysql.query('SELECT * FROM gmailpassword', function(req, res){
+        PASS = res[0].GMPass;
+    });
 
 //Reg
 router.get('/register', function(req, res, next) {
@@ -69,7 +77,7 @@ router.post('/forgot', function(req, res, next) {
                     service: 'Gmail',
                     auth: {
                         user: 'GenericGamingShop@gmail.com',
-                        pass: '123generic'
+                        pass: PASS
                     }
                 });
                 var mailOptions = {
@@ -116,7 +124,7 @@ router.post('/reset/:token', function(req, res) {
         service: 'Gmail',
         auth: {
             user: 'GenericGamingShop@gmail.com',
-            pass: '123generic'
+            pass: PASS
         }
     });
     mysql.query('SELECT * FROM account WHERE token=?', [req.params.token], function(req, res) {
