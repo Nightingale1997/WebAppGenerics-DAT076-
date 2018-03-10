@@ -11,12 +11,15 @@ create DATABASE webshop;
 
 use webshop;
 
+select * from account;
+
 CREATE TABLE account
 (
     Username VARCHAR(16)  NOT NULL,
     Email    VARCHAR(200) NOT NULL,
     Password BINARY(60)   NOT NULL,
     Admin    TINYINT(1)   NOT NULL,
+    token    VARCHAR(200) NULL,
     Name     VARCHAR(200) NULL,
     Address1 VARCHAR(200) NULL,
     Address2 VARCHAR(200) NULL,
