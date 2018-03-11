@@ -38,11 +38,19 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
         res.redirect('product');
 });
 
-router.get('/product', function(req,res){
-    var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
-    mysql.query(sql, function(err, rows, fields){
+router.get('/product', authenticationMiddleware(), function(req,res){
+    var sql = 'SELECT admin FROM account WHERE userID=?';
+    mysql.query(sql, req.session.passport.user.userID, function(err, admin, fields){
         if(err) throw err;
-        res.render('product', { title: 'Products', rows: rows});
+        if(admin[0].admin.toString() == 0){
+            res.redirect('profile')
+        }   else {
+            var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
+            mysql.query(sql, function(err, rows, fields){
+                if(err) throw err;
+                res.render('product', { title: 'Products', rows: rows});
+        });
+    }
 })});
 
 //register clicked on login page
