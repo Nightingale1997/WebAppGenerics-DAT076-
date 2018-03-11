@@ -7,6 +7,7 @@ var expressValidator = require('express-validator');
 var bcrypt = require('bcryptjs');
 var Product = require('../models/Product');
 var Mustache = require('mustache');
+var ShoppingCart = require('../models/ShoppingCart');
 
 
 function loggedIn(req, res, next){
@@ -30,9 +31,11 @@ router.post('/', function(req, res){
    var cartID;
    const usr = req.user.userID;
 
+   var quantity = ShoppingCart.totQty;
+   var price = ShoppingCart.totPrice;
 
    mysql.query('INSERT INTO shoppingcart ( AccountID, Quantity, TotalPrice) VALUES (?, ?, ?)',
-       [req.user.userID, 10, 5], function(req,res){
+       [req.user.userID, quantity, price], function(req,res){
     });
 
    mysql.query('SELECT MAX(ShoppingCartID) AS latestCart FROM shoppingcart', function(req,res){
