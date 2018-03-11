@@ -3,15 +3,57 @@
 <head>
     {{ >partials/head }}
 </head>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+        }
+
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 16px;
+            color: black;
+        }
+
+        button:hover, a:hover {
+            opacity: 0.7;
+        }
+    </style>
+
 <body>
 
-{{ >partials/header}}
+{{ >partials/loggedInheader}}
+<h2 style="text-align:center">{{^peek}}Hello Dear {{username}}{{/peek}}{{#peek}}You are viewing profile of {{username}}{{/peek}}</h2>
+
+<div class="card">
+    <img src="{{^peek}}../images/icons/profile.png{{/peek}}{{#peek}}../../images/icons/profile.png{{/peek}}" alt={{username}} style="width:100%">
+    <h1>{{username}}</h1>
+    <p class="title">{{email}}</p>
+    {{#admin}} <p>Admin</p>
+    {{/admin}}
+    {{^admin}} <p>Customer</p>
+    {{/admin}}
+    <div style="margin: 24px 0;">
+    </div>
+    <p><button>Contact</button></p>
+</div>
+
+
+
 <div class="wrapper">
 
 <h1></h1>
-<p>Welcome to hell</p>
+<p></p>
 </div>
-    {{ >partials/footer }}
+{{ >partials/footer }}
 
     {{ >partials/scripts }}
 </body>

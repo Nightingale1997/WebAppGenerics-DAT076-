@@ -6,7 +6,12 @@
 </head>
 <body onload="loadProducts()">
 
+{{#loggedIn}}
+{{ >partials/loggedInheader}}
+{{/loggedIn}}
+{{^loggedIn}}
 {{ >partials/header}}
+{{/loggedIn}}
 
 <ul id="bannerslider" class="slides">
     <li> <img src="images/slides/ee88a90dccea4d82b38bd08e7ed1d4f9.webp" />
@@ -33,7 +38,7 @@
      <a href="#" class="btn btn-default" role="button">Button</a>-->
 
     <ul id="productlist"></ul>
-    <p>Add Categories</p>
+     <p>Add Categories</p>
     <p>Display products to the right???</p>
 
 </div>
