@@ -6,7 +6,11 @@ const mysql = require('../database.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    if (req.isAuthenticated()){
+        res.render('index', {loggedIn: true});
+        return;
+}
+    res.render('index', {loggedIn: false});
 });
 
 /*

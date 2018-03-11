@@ -8,8 +8,28 @@ var bcrypt = require('bcryptjs');
 var Product = require('../models/Product');
 var Mustache = require('mustache');
 
-router.get('/', function (req, res, next) {
+function loggedIn(req, res, next){
+    if(req.user)
+        next();
+    else
+        res.render('login');
+}
+
+router.get('/', loggedIn, function (req, res) {
     res.render('payment');
 });
+
+router.post('/payment', function(req, res){
+    /*
+   const name = req.body.name;
+   const Address = req.body.address;
+
+   console.log(address);
+   */
+
+});
+
+
+
 
 module.exports = router;

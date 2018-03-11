@@ -1,6 +1,7 @@
 <footer>
     <div class="wrapper">
-        <img src="../images/Logo/Logo.png">
+        {{^peek}}<img src="../images/Logo/Logo.png">{{/peek}}
+        {{#peek}}<img src="../../images/Logo/Logo.png">{{/peek}}
         <p>
             © 2018 WebAppGenerics. Alla rättigheter förbehålls. Alla varumärken är egendom av sina respektiva ägare.
             Moms inräknat i alla priser där det är tillämpligt.</p>

@@ -28,7 +28,7 @@ router.get('/register', function(req, res, next) {
 
 //Login page
 router.get('/login', authenticationMiddleware(),function(req, res, next) {
-    res.render('profile');
+    res.render('profile', {lul: req.session.passport.user.userID});
 });
 
 
@@ -161,8 +161,26 @@ router.get('/', function(req, res) {
 
 //Profile-page
 router.get('/profile', authenticationMiddleware(), function(req,res) {
-    res.render('profile');
-})
+    var sql = 'SELECT username, email, admin FROM account WHERE userID=?';
+    mysql.query(sql, req.session.passport.user.userID, function(err, result, fields){
+        if(err) throw err;
+    if(result[0].admin.toString() == 1){
+        adminVar = true;
+    }
+        else adminVar  = false;
+    res.render('profile', {username: result[0].username.toString(), email: result[0].email.toString(), admin: adminVar, peek: false});
+})});
+
+router.get('/profile/:username', authenticationMiddleware(), async function(req,res) {
+    var sql = 'SELECT username, email, admin, userID FROM account WHERE username=?';
+    mysql.query(sql, req.params.username, function(err, result, fields){
+        if(err) throw err;
+        if(result[0].admin.toString() == 1){
+            adminVar = true;
+        }
+        else adminVar  = false;
+        res.render('profile', {username: result[0].username.toString(), email: result[0].email.toString(), admin: adminVar, peek: true});
+    })});
 
 router.post('/register', function(req, res){
     req.checkBody('email', 'Email is required').notEmpty();

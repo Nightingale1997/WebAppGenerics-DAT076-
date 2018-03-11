@@ -1,22 +1,21 @@
 {{^peek}}
 <header>
     <div class="wrapper">
-        <div class="headerlogo"><a href="../"><img src="../images/Logo/LogoHorizontal.png"> </a></div>
+        <div class="headerlogo"><a href="../../"><img src="../images/Logo/LogoHorizontal.png"> </a></div>
 
         <div class="headersearchbar">
             <div>
                 <input id="search-bar" type="search" onkeyup="findGame()" placeholder="Search stuff">
-                <button id="searchButton"><img src="../images/icons/search.png"></button>
+                <button id="searchButton"><img src="../../images/icons/search.png"></button>
 
             </div>
         </div>
 
         <div class="headerbuttongroup">
-            <a href="../users/login"><button class="coloredbutton">Sign in</button></a>
-            <a href="../users/register"><button>Register</button></a>
             <a href="../users/profile"><button>Profile</button></a>
+            <a href="../users/logout"><button>Sign out</button></a>
             <div id="cartButton" class="dropdown">
-                               <button class="dropbtn"><img src="../images/icons/shoppingcart.png"></button>
+                               <button class="dropbtn"><img src="../../images/icons/shoppingcart.png"></button>
                               <div onload="fillHeaderCart()" id="cart" class="dropdown-content">
                                   <article>There are no items in your cart</article>
                                </div>
@@ -40,9 +39,8 @@
         </div>
 
         <div class="headerbuttongroup">
-            <a href="../../users/login"><button class="coloredbutton">Sign in</button></a>
-            <a href="../../users/register"><button>Register</button></a>
             <a href="../../users/profile"><button>Profile</button></a>
+            <a href="../../users/logout"><button>Sign out</button></a>
             <div id="cartButton" class="dropdown">
                 <button class="dropbtn"><img src="../../images/icons/shoppingcart.png"></button>
                 <div onload="fillHeaderCart()" id="cart" class="dropdown-content">

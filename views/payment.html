@@ -7,7 +7,53 @@
 
 {{ >partials/header}}
 <div class="wrapper">
-<h1>Add forms, ask for login</h1>
+<div class="row">
+    <h1>Checkout</h1>
+    <h4>Your Total: </h4>
+    <div class="center-vertical" id="checkout">
+        <form method="POST" form action="/payment">
+        <div class="row">
+            <div clas="col-xs-12">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+            </div>
+            <div clas="col-xs-12">
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" class="form-control" required>
+                </div>
+            </div>
+            <div clas="col-xs-12">
+                <div class="form-group">
+                    <label for="card-number">Card No.</label>
+                    <input type="text" id="card-number" class="form-control" required>
+                </div>
+            </div>
+            <div clas="col-xs-12">
+                <div class="form-group">
+                    <label for="card-expiry-month">Card Expiration Month</label>
+                    <input type="text" id="card-expiry-month" class="form-control" required>
+                </div>
+            </div>
+            <div clas="col-xs-12">
+                <div class="form-group">
+                    <label for="card-expiry-year">Card Expiration Year</label>
+                    <input type="text" id="card-expiry-year" class="form-control" required>
+                </div>
+            </div>
+            <div clas="col-xs-12">
+                <div class="form-group">
+                    <label for="card-expiry-year">CVC</label>
+                    <input type="text" id="cvc" class="form-control" required>
+                </div>
+            </div>
+            <button class="btn btn-primary button-pay" type="submit">Pay</button>
+                </div>
+            </div>
+        </div>
+    </form>
 
 </div>
 {{ >partials/footer }}
