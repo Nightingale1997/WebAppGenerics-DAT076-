@@ -1,5 +1,4 @@
 // Constructor
-
 class Product {
     constructor(id, name, description, price, genre) {
         this.productID = id;
@@ -9,7 +8,5 @@ class Product {
         this.genre = genre;
     }
 }
-
-
 
 module.exports = Product;

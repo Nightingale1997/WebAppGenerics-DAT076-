@@ -4,35 +4,23 @@ var Product = require('../models/Product');
 var Mustache = require('mustache');
 const mysql = require('../database.js');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+/**
+ * Get the home page.
+ */
+router.get('/', function (req, res, next) {
+    res.render('index', {title: 'Express'});
 });
 
-/*
-    var productID = req.body.id;
-    var cart = new ShoppingCart(req.body.cart ? req.body.cart : {items: {}});
-
-    Product.findbyId(productID, function (err, product) {
-        if (err) {
-            return res.redirect('../views/index');
-        }
-        cart.addProduct(product, product.id);
-        req.body.cart = cart;
-        console.log(req.body.cart);
-        res.redirect('/../views/index');
-    });
-*/
-
-router.post("/", function(req, res, next){
-
-    //router.get("../index.html", function(req, res, next){
-
-
+/**
+ * Post request function. Fetching the ID
+ * for the product from the database. Adding
+ * products to the shopping cart.
+ */
+router.post("/", function (req, res, next) {
 
     var productID = req.body.productID;
-    mysql.query('SELECT * FROM product WHERE ProductID = ?', [productID], function(error, results, fields){
-        if (error){
+    mysql.query('SELECT * FROM product WHERE ProductID = ?', [productID], function (error, results, fields) {
+        if (error) {
             console.log('error #2');
             throw error;
         }
@@ -43,9 +31,6 @@ router.post("/", function(req, res, next){
         var ShoppingCart = require('../models/ShoppingCart');
         ShoppingCart.addProduct(productToAdd);
 
-        console.log('Cool');
-
-
         var ShoppingCart = {ShoppingCart: ShoppingCart};
         var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}{{#products}}<ul><li>Title: {{0.productName}}</li><li>Description: {{0.description}}</li><li>Price: {{0.price}} each</li>" +
             "<li>Genre: {{0.genre}}</li><li>Quantitity {{1}}</li></ul>{{/products}}<li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><ul></ul> <br> <br>{{/ShoppingCart}}";
@@ -53,20 +38,20 @@ router.post("/", function(req, res, next){
         console.log(html);
         res.send(html);
 
-        });
+    });
 
-    //Old, fix tomorrow
-    /*
-
-    */
 });
 
-
+/**
+ * Get request function. Fetching the products
+ * from the database. Sending the
+ * products to the html page
+ */
 router.get('/products', (req, res) => {
 
 
-    mysql.query('SELECT * FROM product', function(error, results, fields){
-        if (error){
+    mysql.query('SELECT * FROM product', function (error, results, fields) {
+        if (error) {
             console.log('error #2');
             throw error;
         }
@@ -78,14 +63,6 @@ router.get('/products', (req, res) => {
         var html = Mustache.to_html(template, products);
         res.send(html);
     });
-
-
-   /* var html = "";
-    products.forEach(function(element) {
-        html += "<ul><li>Title: "+ element.productName +"</li><li>Description: "+ element.description +"</li><li>Price: "+ element.price +" Euro</li><li>Genre: "+ element.genre +"</li></ul><br><br>";
-    });*/
-
-
 
 });
 

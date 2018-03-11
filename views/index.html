@@ -5,9 +5,9 @@
 <link rel="stylesheet" href="../stylesheets/skdslider.css">
 </head>
 <body onload="loadProducts()">
-
 {{ >partials/header}}
 
+<!-- Slideshow main page -->
 <ul id="bannerslider" class="slides">
     <li> <img src="images/slides/ee88a90dccea4d82b38bd08e7ed1d4f9.webp" />
         <!--Slider Description example-->
@@ -29,16 +29,14 @@
 
 <div class="wrapper">
     <section></section>
-    <!-- Add your site or application content here <ul id="productlist">
-     <a href="#" class="btn btn-default" role="button">Button</a>-->
-
+    <!-- Add your site or application content here-->
     <ul id="productlist"></ul>
     <p>Add Categories</p>
     <p>Display products to the right???</p>
 
 </div>
-{{ >partials/footer }}
 
+{{ >partials/footer }}
 {{ >partials/scripts }}
 <script src="javascripts/index.js"></script>
 <script src="javascripts/skdslider.js"></script>

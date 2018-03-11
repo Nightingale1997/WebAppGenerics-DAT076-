@@ -26,7 +26,11 @@ module.exports = function ShoppingCart(oldCart) {
 };
 */
 
-// Constructor
+/**
+ * Shopping Cart class. Price
+ * and quantity is calculated and
+ * the result is sent to index.js.
+ */
 class ShoppingCart {
     constructor() {
         this.products = [];
