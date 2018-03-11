@@ -129,10 +129,17 @@ body{
     color: #e8e5e0;
 }
 
-
+a:hover
+{
+opacity:0.8;
+}
 .wrapper{
     width:1200px;
     margin: 0 auto;
+}
+
+.addToCart{
+    margin-left: 35%;
 }
 
 header, footer{
@@ -311,6 +318,7 @@ p{
 
 .productList{
     list-style-type: none;
+    width: 100%;
 }
 
 .productList li{
@@ -322,7 +330,39 @@ p{
     width: 20%;
 }
 
+.product{
+    width: 15%;
+    display: inline-block;
+    padding: 0;
+    list-style: none;
+    position:relative;
+    margin-right: 5%;
+}
 
+.productImage{
+    width: 100%;
+    height: 250px;
+}
+.description{
+    padding:5px 5%;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 240px;
+    width: 90%;
+}
+
+.productInfo{
+    padding:5%;
+    background: #161618;
+}
+
+.product:hover .description{
+    visibility: visible;
+    opacity: 1;
+}
 
 footer p{
     width: 80%;
