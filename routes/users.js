@@ -27,22 +27,23 @@ router.get('/register', function(req, res, next) {
 
 
 //Login page
-router.get('/login', authenticationMiddleware(),function(req, res, next) {
-    res.render('profile', {lul: req.session.passport.user.userID});
+router.get('/login', authenticationMiddleware(), function(req, res, next) {
+    res.render('profile');
 });
 
 
 //Login post to handle Admin
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
+        res.redirect('product');
+});
 
+router.get('/product', function(req,res){
     var sql = 'SELECT ProductID, Name, Description, Price, SalePrice from product';
-
     mysql.query(sql, function(err, rows, fields){
         if(err) throw err;
         res.render('product', { title: 'Products', rows: rows});
-    });
-        });
+})});
 
 //register clicked on login page
 router.get('/signup', function(req,res){
@@ -279,7 +280,7 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, req.body.ProductID + '.png')
     }
-})
+});
 
 var upload = multer({ storage: storage })
 
