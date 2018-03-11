@@ -26,28 +26,14 @@ function fillHeaderCart(){
 
 };
 
-    function searchProducts(){
-    $.get("/products/", function (data) {
-        $('#productSearch').html(data);
-        $("#searchButton").click(function () {
-            //setTimeout(function(){document.location.href = 'search'},500);
-            window.location.href='/search/', true;
+$("#searchButton").click(function(){
+    var input = document.getElementById("search-bar").value;
 
-            /*
-            console.log(this.id);
-            $.post("/",
-                {
-                    productID: this.id
-                },
-                function (data) {
-                    $('#cart').html(data);
-                });
-                */
-        });
+    if(input != null && input != ""){
+        window.location.replace("../search?userInput="+input);
+    }
 
-    });
-
-    };
+});
 
 
 
