@@ -51,8 +51,8 @@ router.post("/", function(req, res, next){
 
 
         var ShoppingCart = {ShoppingCart: ShoppingCart};
-        var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}{{#products}}<ul><li>Title: {{0.productName}}</li><li>Description: {{0.description}}</li><li>Price: {{0.price}} each</li>" +
-            "<li>Genre: {{0.genre}}</li><li>Quantitity {{1}}</li></ul>{{/products}}<li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><ul></ul> <br> <br>{{/ShoppingCart}}";
+        var template = "{{#ShoppingCart}}<article class='headerProduct'>{{#products}}<ul><li><img class='headerProductImage' src='/images/products/{{0.productID}}.png'></li><li>{{0.productName}}</li><li class='headerQty'>x{{1}}</li></ul><hr>{{/products}}</article>{{/ShoppingCart}}"
+
         var html = Mustache.to_html(template, ShoppingCart);
         console.log(html);
         res.send(html);
@@ -99,8 +99,8 @@ router.get('/headerCart', (req, res) => {
     var ShoppingCart = require('../models/ShoppingCart');
 
     var ShoppingCart = {ShoppingCart: ShoppingCart};
-    var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}{{#products}}<ul><li>Title: {{0.productName}}</li><li>Description: {{0.description}}</li><li>Price: {{0.price}} each</li>" +
-        "<li>Genre: {{0.genre}}</li><li>Quantitity {{1}}</li></ul>{{/products}}<li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><ul></ul> <br> <br>{{/ShoppingCart}}";
+    var template = "{{#ShoppingCart}}<article class='headerProduct'>{{#products}}<ul><li><img class='headerProductImage' src='/images/products/{{0.productID}}.png'></li><li>{{0.productName}}</li><li class='headerQty'>x{{1}}</li></ul><hr>{{/products}}</article>{{/ShoppingCart}}"
+
     var html = Mustache.to_html(template, ShoppingCart);
     console.log(html);
     res.send(html);

@@ -24,8 +24,8 @@ router.post('/searchresults', (req, res) => {
 
         var products = results;
         var products = {products: products};
-        var template = "{{#products}}<ul><li>Title: {{Name}}</li><li>Description: {{Description}}</li><li>Price: {{Price}}</li>" +
-            "<li>Genre: {{Genre}}</li><button id ='{{ProductID}}' class='btn addToCart'>Shop Button</button></ul> <br> <br>{{/products}}"
+        var template = "{{#products}}<article class='product'><div class='description'>{{Description}}</div><img class='productImage' src='/images/products/{{ProductID}}.png'><div class='productInfo'>{{Name}}<br> €{{Price}}</li>" +
+            "<button id ='{{ProductID}}' class='btn addToCart'>Add to Cart</button></div></article>{{/products}}"
         var html = Mustache.to_html(template, products);
         res.send(html);
     });
