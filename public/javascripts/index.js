@@ -8,7 +8,8 @@ jQuery(document).ready(function(){
 
 function loadProducts(){
 
-    $.get("/products", function( data ) {
+    $.get("/products", function(data) {
+        console.log(data);
         $('#productlist').html(data);
 
         $(".addToCart").click(function(){

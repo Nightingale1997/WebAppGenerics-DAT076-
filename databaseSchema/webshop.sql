@@ -94,3 +94,6 @@ CREATE TABLE gmailPassword (
 insert into gmailPassword (GMPass) VALUES ('X');
 
 select * from gmailPassword;
+
+insert into Product (ProductID, Name, Description, Price, SalePrice, Genre) VALUES (1, 'Testgame1', 'Interesting stuff', 30, 0, 'Spook');
+insert into Product (ProductID, Name, Description, Price, SalePrice, Genre) VALUES (2, 'Testgame2', 'Interesting stuff', 40, 0, 'Spook');

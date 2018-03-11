@@ -31,7 +31,7 @@ router.post("/", function(req, res, next){
 
 
     var productID = req.body.productID;
-    mysql.query('SELECT * FROM product WHERE ProductID = ?', [productID], function(error, results, fields){
+    mysql.query('SELECT * FROM Product WHERE ProductID = ?', [productID], function(error, results, fields){
         if (error){
             console.log('error #2');
             throw error;
@@ -39,7 +39,7 @@ router.post("/", function(req, res, next){
 
         var productToAdd = results[0];
 
-        productToAdd = new Product(productToAdd.ProductID, productToAdd.Name, productToAdd.Description, productToAdd.Price, productToAdd.SalePrice);
+        productToAdd = new Product(productToAdd.ProductID, productToAdd.Name, productToAdd.Description, productToAdd.Price, productToAdd.Genre, productToAdd.SalePrice);
         var ShoppingCart = require('../models/ShoppingCart');
         ShoppingCart.addProduct(productToAdd);
 
@@ -65,7 +65,7 @@ router.post("/", function(req, res, next){
 router.get('/products', (req, res) => {
 
 
-    mysql.query('SELECT * FROM product', function(error, results, fields){
+    mysql.query('SELECT * FROM Product', function(error, results, fields){
         if (error){
             console.log('error #2');
             throw error;
@@ -84,6 +84,25 @@ router.get('/products', (req, res) => {
     products.forEach(function(element) {
         html += "<ul><li>Title: "+ element.productName +"</li><li>Description: "+ element.description +"</li><li>Price: "+ element.price +" Euro</li><li>Genre: "+ element.genre +"</li></ul><br><br>";
     });*/
+
+
+
+});
+
+router.get('/headerCart', (req, res) => {
+
+
+    var ShoppingCart = require('../models/ShoppingCart');
+
+    var ShoppingCart = {ShoppingCart: ShoppingCart};
+    var template = "<h1>Shopping Cart</h1>{{#ShoppingCart}}{{#products}}<ul><li>Title: {{0.productName}}</li><li>Description: {{0.description}}</li><li>Price: {{0.price}} each</li>" +
+        "<li>Genre: {{0.genre}}</li><li>Quantitity {{1}}</li></ul>{{/products}}<li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><ul></ul> <br> <br>{{/ShoppingCart}}";
+    var html = Mustache.to_html(template, ShoppingCart);
+    console.log(html);
+    res.send(html);
+
+
+
 
 
 

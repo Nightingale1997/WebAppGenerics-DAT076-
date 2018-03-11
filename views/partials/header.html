@@ -14,9 +14,9 @@
             <a href="../users/login"><button class="coloredbutton">Sign in</button></a>
             <a href="../users/register"><button>Register</button></a>
             <a href="../users/profile"><button>Profile</button></a>
-            <div class="dropdown">
+            <div id="cartButton" class="dropdown">
                                <button class="dropbtn"><img src="../images/icons/shoppingcart.png"></button>
-                              <div id="cart" class="dropdown-content">
+                              <div onload="fillHeaderCart()" id="cart" class="dropdown-content">
                                   <article>There are no items in your cart</article>
                                </div>
                            </div>

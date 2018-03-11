@@ -55,6 +55,52 @@ class ShoppingCart {
         }
 
     }
+
+    removeProduct(product){
+
+var quantity =this.totQty;
+var totalPrice = this.totPrice;
+        this.products.forEach(function (entry) {
+            if (entry[0].productID == product.productID) {
+                if(entry[1]>1){
+                entry[1] -= 1;
+                    quantity--;
+                    totalPrice -= product.price;
+                }
+
+                return;
+            }
+        });
+
+        this.totQty = quantity;
+        this.totPrice = totalPrice;
+    }
+
+    deleteProduct(product){
+
+        var products = this.products;
+        var quantity =this.totQty;
+        var totalPrice = this.totPrice;
+
+        this.products.forEach(function (entry) {
+            if (entry[0].productID == product.productID) {
+                quantity -= entry[1];
+                totalPrice -= (product.price*entry[1]);
+                var index = products.indexOf(entry[0]);
+                products.splice(index, 1);
+                return;
+            }
+        });
+
+
+
+        this.products=products;
+        this.totQty = quantity;
+        this.totPrice = totalPrice;
+
+    }
+
+
 };
 
 var shoppingCart = new ShoppingCart();

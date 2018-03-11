@@ -294,6 +294,34 @@ p{
 
 
 
+#shoppingCartReview{
+    width: 100%;
+}
+#shoppingCartReview article{
+    display: inline-block;
+}
+.shoppingCart{
+    width:80%;
+}
+
+
+.shoppingCart ul{
+    padding:0;
+}
+
+.productList{
+    list-style-type: none;
+}
+
+.productList li{
+    display: inline;
+    margin-right:5%;
+}
+
+.review{
+    width: 20%;
+}
+
 
 
 footer p{

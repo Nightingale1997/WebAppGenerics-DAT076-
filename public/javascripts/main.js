@@ -1,8 +1,31 @@
 jQuery(document).ready(function () {
 
+    $("#cartButton").click(function(){
+        console.log(this.id);
 
+        window.location.replace("../cart");
+    });
+
+
+    (function fillHeaderCart(){
+        $.get("/headerCart/", function (data) {
+            console.log("Cart fill attempted")
+            $('#cart').html(data);
+        });
+
+    })();
 
 });
+
+
+function fillHeaderCart(){
+    $.get("/headerCart/", function (data) {
+        console.log("Cart fill attempted")
+        $('#cart').html(data);
+    });
+
+};
+
     function searchProducts(){
     $.get("/products/", function (data) {
         $('#productSearch').html(data);
@@ -25,6 +48,8 @@ jQuery(document).ready(function () {
     });
 
     };
+
+
 
 
         // var search = new Search($('#search-bar').val());

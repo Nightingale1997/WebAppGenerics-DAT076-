@@ -15,6 +15,8 @@ var bcrypt = require('bcryptjs');
 var index =  require('./routes/index');
 var users = require('./routes/users');
 var search = require('./routes/search');
+var cart = require('./routes/cart');
+var payment = require('./routes/payment');
 var db = require('./controllers/db');
 var app = express();
 
@@ -149,7 +151,8 @@ app.use(function(req, res, next){
 app.use('/', index);
 app.use('/users', users);
 app.use('/search', search);
-
+app.use('/cart', cart);
+app.use('/payment', payment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
