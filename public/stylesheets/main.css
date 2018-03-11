@@ -342,6 +342,7 @@ padding:0;
     padding:0;
 }
 
+
 .productList{
     list-style-type: none;
     width: 100%;
@@ -349,11 +350,22 @@ padding:0;
 
 .productList li{
     display: inline;
-    margin-right:5%;
+    margin-right:2.5%;
+    width:5%
+}
+
+.cartImage{
+    width: 10%;
+    height: 100px;
 }
 
 .review{
-    width: 20%;
+    width: 10%;
+    list-style: none;
+    background: #161618;
+    padding: 2.5%;
+    margin-bottom:50px;
+    margin-left:2.5%;
 }
 
 .product{

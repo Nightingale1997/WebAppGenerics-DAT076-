@@ -19,8 +19,8 @@ router.get('/fillCart', (req, res) => {
     var ShoppingCart = require('../models/ShoppingCart');
 
     var ShoppingCart = {ShoppingCart: ShoppingCart};
-    var template = "{{#ShoppingCart}}<article class='shoppingCart'><h1>Shopping Cart</h1><ul>{{#products}}<ul class='productList'><li>{{0.productName}}</li><li>{{0.genre}}</li><li>€{{0.price}} each</li>" +
-        "<li><button id='{{0.productID}}' class='coloredbutton increaseButton'>+</button></li><li>Quantitity {{1}}</li><li> <button id='{{0.productID}}' class='coloredbutton reduceButton'>-</button></li><li> <button id='{{0.productID}}' class='coloredbutton deleteButton'>Delete</button></li></ul>{{/products}}</ul></article><article class='review'><li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><li><a href='../payment'><button class='coloredbutton'>Proceed to payment</button></a></li></article>{{/ShoppingCart}}";
+    var template = "{{#ShoppingCart}}<article class='shoppingCart'><h1>Shopping Cart</h1><ul>{{#products}}<ul class='productList'><li><img class='cartImage' src='/images/products/{{0.productID}}.png' </li><li>{{0.productName}}</li><li>{{0.genre}}</li><li>€{{0.price}} each</li>" +
+        "<li><button id='{{0.productID}}' class='coloredbutton increaseButton'>+</button></li><li>Quantitity {{1}}</li><li> <button id='{{0.productID}}' class='coloredbutton reduceButton'>-</button></li><li> <button id='{{0.productID}}' class='coloredbutton deleteButton'>Delete</button></li></ul><hr>{{/products}}</ul></article><article class='review'><li>Total Quantity: {{totQty}}</li><li>Total Price: {{totPrice}}</li><li><a href='../payment'><button class='coloredbutton'>Proceed to payment</button></a></li></article>{{/ShoppingCart}}";
     var html = Mustache.to_html(template, ShoppingCart);
     console.log(html);
     res.send(html);
