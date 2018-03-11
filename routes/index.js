@@ -97,10 +97,15 @@ router.get('/headerCart', (req, res) => {
 
 
     var ShoppingCart = require('../models/ShoppingCart');
+if(ShoppingCart.products.length>0){
+
 
     var ShoppingCart = {ShoppingCart: ShoppingCart};
     var template = "{{#ShoppingCart}}<article class='headerProduct'>{{#products}}<ul><li><img class='headerProductImage' src='/images/products/{{0.productID}}.png'></li><li>{{0.productName}}</li><li class='headerQty'>x{{1}}</li></ul><hr>{{/products}}</article>{{/ShoppingCart}}"
-
+}
+else{
+    var template = "<article class='headerProduct'><h1>There are no items in your cart</h1></article>"
+}
     var html = Mustache.to_html(template, ShoppingCart);
     console.log(html);
     res.send(html);
