@@ -37,10 +37,17 @@
     <img src="{{^peek}}../images/icons/profile.png{{/peek}}{{#peek}}../../images/icons/profile.png{{/peek}}" alt={{username}} style="width:100%">
     <h1>{{username}}</h1>
     <p class="title">{{email}}</p>
-    {{#admin}} <p>Admin</p>
+    {{#peek}}{{#admin}} <a href="delete/{{username}}"><button>Delete this profile</button></a>
+    {{/admin}}
+    {{^admin}} <p>You can not delete this page. You are not admin</p>
+    {{/admin}}
+    {{/peek}}
+
+    {{^peek}}{{#admin}} <p>Admin</p>
     {{/admin}}
     {{^admin}} <p>Customer</p>
     {{/admin}}
+    {{/peek}}
     <div style="margin: 24px 0;">
     </div>
     <p><button>Contact</button></p>

@@ -171,16 +171,34 @@ router.get('/profile', authenticationMiddleware(), function(req,res) {
     res.render('profile', {username: result[0].username.toString(), email: result[0].email.toString(), admin: adminVar, peek: false});
 })});
 
-router.get('/profile/:username', authenticationMiddleware(), async function(req,res) {
+router.get('/profile/:username', authenticationMiddleware(), function(req,res) {
     var sql = 'SELECT username, email, admin, userID FROM account WHERE username=?';
-    mysql.query(sql, req.params.username, function(err, result, fields){
-        if(err) throw err;
-        if(result[0].admin.toString() == 1){
-            adminVar = true;
+    mysql.query(sql, req.params.username, function(err, resultprof, fields) {
+        if (err) throw err;
+        if(typeof resultprof[0] === "undefined"){
+            res.redirect('../profile');
+            return;
         }
-        else adminVar  = false;
-        res.render('profile', {username: result[0].username.toString(), email: result[0].email.toString(), admin: adminVar, peek: true});
-    })});
+        var sql = 'SELECT admin FROM account WHERE userID=?';
+        mysql.query(sql, req.session.passport.user.userID, function(err, result, fields){
+            if(err) throw err;
+            if(result[0].admin.toString() == 1){
+                adminVar = true;
+            } else adminVar = false;
+        res.render('profile', {username: resultprof[0].username.toString(), email: resultprof[0].email.toString(), admin: adminVar, peek: true});
+    })})});
+
+router.get('/profile/delete/:username', authenticationMiddleware(), function(req,res) {
+    var sql = 'SELECT admin FROM account WHERE userID=?';
+    mysql.query(sql, req.session.passport.user.userID, function(err, result, fields){
+        if(err) throw err;
+            if(result[0].admin.toString() == 1){
+                mysql.query('DELETE FROM account WHERE username=?', req.params.username, function (err, rezults, field) {
+                    if (err) throw err;
+                    console.log('Deleted profile');
+                    //res.render('profile', {username: result[0].username.toString(), email: result[0].email.toString(), admin: adminVar, peek: true});
+                    res.redirect('../../profile');
+                })}})});
 
 router.post('/register', function(req, res){
     req.checkBody('email', 'Email is required').notEmpty();
